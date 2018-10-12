@@ -30,3 +30,18 @@ console.log(daniel.nombre);  //Para imprimir un valor
 console.log(daniel.mascotas);
 console.log(daniel.mascotas.nombre);
 console.log(daniel);
+delete daniel.hijo;
+console.log(daniel);
+daniel.hija = 12323;
+console.log(daniel);
+daniel.hija = {
+    nombre: '&&&'
+};
+
+console.log(daniel.abuelo.nombre);  //error
+
+if(true){
+    console.log("Si")
+}else{
+    console.log("No")
+}
