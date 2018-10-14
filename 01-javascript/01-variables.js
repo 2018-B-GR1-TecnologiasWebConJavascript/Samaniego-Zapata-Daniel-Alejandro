@@ -1,6 +1,10 @@
 //Int edad = 10; TIPADO
 
+// NO TIPADO
+
 var edad = 10;
+edad = "10";
+var sueldo =1.235;
 edadString="10";
 
 
@@ -20,6 +24,7 @@ var daniel = {
     }
 }// object
 
+console.log("Hola Mundo");
 
 console.log("dato valor", dato); //undefined
 console.log("dato tipo", typeof dato, ); //undefined
