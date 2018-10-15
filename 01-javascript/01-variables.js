@@ -40,17 +40,84 @@ console.log(daniel.nombre);  //Para imprimir un valor
 console.log(daniel.mascotas);
 console.log(daniel.mascotas.nombre);
 console.log(daniel);
-delete daniel.hijo;
+delete daniel.hijo;      //borrar
 console.log(daniel);
-daniel.hija = 12323;
+daniel.hija = 12323;    //agregar números
 console.log(daniel);
-daniel.hija = {
+daniel.hija = {     //agregar un objeto
     nombre: '&&&'
 };
 
 console.log(daniel.abuelo.nombre);  //error
 
 if (true) {
+    console.log("Si") //Se imprime
+} else {
+    console.log("No")
+}
+
+
+if (false) {
+    console.log("Si")
+} else {
+    console.log("No")  // Se imprime
+}
+
+if (1) {    // Truthy
+    console.log("Si")   // Se imprime
+} else {
+    console.log("No")
+}
+
+if (0) {    // Falsy
+    console.log("Si")
+} else {
+    console.log("No")      //Se imprime
+}
+
+if (-1) {   // Truthy
+    console.log("Si")   // se imprime
+} else {
+    console.log("No")
+}
+
+if ("") {       // Un STRING vacío es Falsy
+    console.log("Si")
+} else {
+    console.log("No")
+}
+
+if ("a") {  // Un STRING lleno es Truthy
+    console.log("Si")
+} else {
+    console.log("No")
+}
+
+if (null) {     // Falsy
+    console.log("Si")
+} else {
+    console.log("No")   // se imprime
+}
+
+if ({}) {  // Con un OBJETO VACÏO es Truthy
+    console.log("Si")
+} else {
+    console.log("No")
+}
+
+if ({nombre:'daniel'}) {  // Con un OBJETO LLENO es Truthy
+    console.log("Si")
+} else {
+    console.log("No")
+}
+
+if (new Date()) {  //Truthy
+    console.log("Si")
+} else {
+    console.log("No")
+}
+
+if (undefined) {  // Falsy
     console.log("Si")
 } else {
     console.log("No")
