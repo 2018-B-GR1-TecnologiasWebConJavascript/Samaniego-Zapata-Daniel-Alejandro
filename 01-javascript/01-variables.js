@@ -50,6 +50,8 @@ daniel.hija = {
 
 //console.log(daniel.abuelo.nombre);  //error
 
+console.log(daniel.hija);
+
 if (true) {
     console.log("Si") //Se imprime
 } else {
