@@ -42,13 +42,13 @@ console.log(daniel.mascotas.nombre);
 console.log(daniel);
 delete daniel.hijo;      //borrar
 console.log(daniel);
-daniel.hija = 12323;    //agregar números
+//daniel.hija = 12323;    //agregar números
 console.log(daniel);
-daniel.hija = {     //agregar un objeto
+daniel.hija = {
     nombre: '&&&'
-};
+}; //agregar un objeto
 
-console.log(daniel.abuelo.nombre);  //error
+//console.log(daniel.abuelo.nombre);  //error
 
 if (true) {
     console.log("Si") //Se imprime
