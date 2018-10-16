@@ -100,3 +100,6 @@ arreglo.findIndex(
         return 2;
     }
 ); //1
+
+//15.10.2018
+
