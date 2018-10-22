@@ -86,4 +86,27 @@ const respuestaEvery = arregloNumeros
 
 console.log(respuestaEvery);
 
+//reduce
+const respuestaReduce = arregloNumeros
+    .reduce(
+        (valorActualDeLaOperacion, valorActualDelArreglo) => {
+        //(0 + 9 + 1, 8) => {
+            return valorActualDeLaOperacion + valorActualDelArreglo
+        },
+        0
+    );
 
+console.log(respuestaReduce);
+
+const respuestaReduce2 = arregloNumeros
+    .reduce((acumulado, valorActual) => acumulado - valorActual, 100);
+    //.reduce((a, b) => a + b.sueldo, 0);
+
+console.log(respuestaReduce2);
+
+//const respuestaReduce3 = arregloNumeros
+  //  .reduce((acumulado, valorActual) =>
+    //   if (valorActual > 7)
+
+
+//console.log(respuestaReduce3);
