@@ -1,4 +1,17 @@
-var arreglo = [];
+
+var vicente = {
+    nombre: "Vicente"
+
+};
+
+var eguez = {
+    suelod: 1.10
+};
+
+var adrian = {
+    edad: 20,
+
+//var arreglo = [];
 
 var arregloNumeros = [1, 2, 3];
 
@@ -87,6 +100,10 @@ var adrian = {
     }
 };
 
+
+var vicenteAdrianEguez = {
+    ...adrian
+}
 
 var vicenteAdrianEguez = {
     ...vicente,
