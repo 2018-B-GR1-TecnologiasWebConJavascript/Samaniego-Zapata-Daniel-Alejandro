@@ -44,7 +44,7 @@ const nuevaPromesaEscritura = (nombreArchivo, contenidoArchivo) => {
 nuevaPromesa(nombre)
     .then(
         (contenido) => {
-            console.log(contenido);
+            console.log('OK', contenido);
             return nuevaPromesaEscritura('07-ejemplo2.txt', contenido + 'Adios amigos');
         }
     )
@@ -60,14 +60,22 @@ nuevaPromesa(nombre)
     );
 
 
-nuevaPromesa (appendFile(
-    '06-texto.txt',
-    '\nHola amigos',
-    (contenido, err) => {
-        if (err) {
-            console.log(err);
-        } else {
+
+function appendFile(nombreArchivo, contenido) {
+    nuevaPromesa("07-ejemplo.txt")
+        .then(contenido => {
             console.log(contenido);
-        }
-    });
-)
+            return nuevaPromesaEscritura(
+                "07-ejemplo2.txt",
+                contenido + "Adios amigos"
+            );
+        })
+        .then(contenidoArchivoEscrito => {
+            console.log(contenidoArchivoEscrito);
+        })
+        .catch(error => {
+            console.log("Catch", error);
+        });
+}
+
+appendFile("06-texto.txt", "\nHola amigos");
