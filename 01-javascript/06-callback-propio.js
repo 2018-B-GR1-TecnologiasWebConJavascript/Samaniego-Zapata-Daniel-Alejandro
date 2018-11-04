@@ -64,7 +64,7 @@ appendFile(
 // 2-C.txt      'C'
 
 const respuesta = {
-        nombreArchivo: '',
+    nombreArchivo: '',
     contenidoArchivo: '',
     error: '',
 };
@@ -74,7 +74,7 @@ function ejercicio(arregloStrings, callback){
     const respuestas = [];
     arregloStrings.forEach(
             (string, indice) => {
-                const nombreDelArchivo = '${indice} - ${string}.txt';
+                const nombreDelArchivo = '${indice}-${string}.txt';
                 const contenidoArchivo = string;
 
                 fs.writeFile(
