@@ -70,25 +70,24 @@ const respuesta = {
 };
 [respuesta, respuesta, respuesta, respuesta]
 
-function ejercicio(arregloStrings){
+function ejercicio(arregloStrings, callback){
     const respuestas = [];
-    arregloStrings
-        .forEach(
+    arregloStrings.forEach(
             (string, indice) => {
                 const nombreDelArchivo = '${indice} - ${string}.txt';
-                const contenido = string;
+                const contenidoArchivo = string;
 
                 fs.writeFile(
                     nombreDelArchivo,
-                    contenido,
+                    contenidoArchivo,
                     (err) => {
                         const respuesta = {
                             nombreDelArchivo: nombreDelArchivo,
-                            contenidoArchivo: contenido,
+                            contenidoArchivo: contenidoArchivo,
                             error: err,
                         };
                         respuestas.push(respuesta);
-                        const estaCompletoElArreglo = respuestas.length ===
+                        const estaCompletoElArreglo = respuestas.length === arregloStrings.length;
                         if (estaCompletoElArreglo){
                             callback(respuestas);
                         }
@@ -100,9 +99,8 @@ function ejercicio(arregloStrings){
 }
 
 ejercicio(
-    ['A', 'B', 'C']
-    (respuestaEjercicio) => {
-        console.log(respuestaEjercicio);
-}
-)
+    ['A', 'B', 'C'],
+    (respuestas) => {
+        console.log(respuestas);
+})
 
