@@ -45,6 +45,7 @@ nuevaPromesa(nombre)
     .then(
         (contenido) => {
             console.log('OK', contenido);
+            //concatenando
             return nuevaPromesaEscritura('07-ejemplo2.txt', contenido + 'Adios amigos');
         }
     )
@@ -60,7 +61,7 @@ nuevaPromesa(nombre)
     );
 
 
-
+/*
 function appendFile(nombreArchivo, contenido) {
     nuevaPromesa("07-ejemplo.txt")
         .then(contenido => {
@@ -79,3 +80,47 @@ function appendFile(nombreArchivo, contenido) {
 }
 
 appendFile("06-texto.txt", "\nHola amigos");
+
+*/
+const ejercicio = (arregloStrings) => {
+    const respuestas = [];
+    return new Promise((resolve, reject) => {
+        arregloStrings.forEach(
+            (string, indice) => {
+                const nombreDelArchivo = '${indice} - ${string}.txt';
+                const contenidoArchivo = string;
+                fs.writeFile(
+                    nombreDelArchivo,
+                    contenidoArchivo,
+                    (err) => {
+
+                        if (err) {
+                            reject(err)
+                        } else {
+                            const respuesta = {
+                                nombreDelArchivo: nombreDelArchivo,
+                                contenidoArchivo: contenidoArchivo,
+                                error: err,
+                            };
+                            respuestas.push(respuesta);
+                            resolve(respuestas)
+                        }
+                    })
+            });
+    })
+}
+
+
+ejercicio(['A', 'B', 'C', 'D'])
+    .then(
+        (respuestas) => {
+            console.log(respuestas);
+            return ejercicio(['A', 'B', 'C', 'D']);
+        }
+    )
+    .catch(
+        (error) => {
+            console.log('Catch', error);
+        }
+    );
+
