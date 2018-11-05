@@ -1,85 +1,86 @@
-
-const edad:number = 13;
-const nombre:string = 'Adrian';
-const casado:boolean = 'false';
-const adrian = {
-    nombre: 'Adrian'
-};
-const numeros: number[] = [1, 2, 3, 4];
-
+// 01-tipo-variables.ts
 
 //let edad:number | string = 13;
-//edad = 25;
-edad = 'Nombre';
 
-let variableLocal: any = '';
-variableLocal = false;
+let variableLoca: any ='';
+variableLoca = false;
 
+//let nombre:string = 'Adrian';    NO ES NECESARIO
 let nombre = 'Adrian';
 //duck typing ->
-let casado: boolean = false;
-let casado: false;
-let casado: null;
-casado = undefined;
-let adrian: {   //Interface
-    nombre: string;
-}= {    // Jason
-    nombre: 'Daniel'
-    apellido: 'Sarzosa';
-};
-let fechaNacimiento: Date = new Date();
-/*let promesa:Date Date = new Date();
-    executor (resolce)
-)
-*/
-adrian.nombre = 'Vicen'
-console.log(adrian);
-let numeros: number[] = [1, 2, 3, 4];
+//nombre = 13;
 
-function saludar (nombre:string, // REQUERIDOS
-                  apellido?: string, // OPCIONALES
-                  ...otrosNombres: string[]): any{  //INFINITOS
+
+let casado:boolean = false;
+
+let adrian:{        //INTERFACE, sirve para definir el tipo de json
+    nombre:string;
+    apellido?:string; //? -> Señala que es del tipo opcional
+} = {               //JSON
+    nombre:'Adrian',
+    apellido:'Salas'
+};
+
+let fechaNacimiento:Date = new Date();
+
+//Mediante la misma clase se tipean las instancias de  una clase
+
+/*
+let promesa:Promise<number> = ()=> {
+    return new Promise(
+        executor: (resolve,reject) => {
+            resolve(1);
+    };
+    );
+};
+*/
+
+
+console.log(adrian);
+
+let numeros:number[] = [1, 2, 3, 4];
+
+//Doc typing
+function saludar(
+    nombre:string,
+    apellido?:string,
+    ...otrosNombres: string[]):string {
     return '';
 }
 
-
-
-let respuestSaludar: number = <number> saludar(nombre: 'Vicente', apellido: 'Eguez', otrosNombres: '','','','');
-respuestSaludar = 1;
-//respuestSaludar = '';
-
-const saludo = (nombre: string): number =>{
-    return 1;
-};
+//Casteo de datos
+//let respuestSaludar = <string> saludar(nombre:'',apellido='',otrosNombres='','','');
+//respuestaSaludar = 1:
 
 console.log();
 
-// CLASE
+//CLASE
 
 class Usuario{
-    public edad:string;
-    nombre;  // Si se omite es publico y ANY
+    protected edad:string;
+    nombre;
     constructor(){
 
     }
-    saludar(nombre: string): string{
+    saludar(nombre:string): string{
         return nombre;
     }
-}
+};
+
 const adrianInstancia = new Usuario();
 
-interface UsuarioInterface{
-    nombre: string;
-    apellido?: string;
 
+interface UsuarioInterface {
+    nombre:string;
+    apellido?:string;
 }
 
-class UsuarioDummy{
-    nombre: string;
-    apellido?: string;
+class UsuarioDummy {
+    nombre:string;
+    apellido?:string
 }
 
-const vicente: UsuarioDummy = {
-    nombre: 'Vicente';
-    apellido?: 'Eguez';
-};
+const vicente:UsuarioDummy = {
+    nombre:'Vicente',
+    apellido:'Eguez'
+}
