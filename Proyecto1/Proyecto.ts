@@ -23,28 +23,48 @@ const menuFotos = {
 
 const atributosFoto = [
     {
-        name: 'nombre',
+        name: 'Nombre',
         type: 'input',
         message: 'Ingresar el nombre de la foto'
     },
 
     {
         type: 'input',
-        name: 'ubicacion',
+        name: 'Ubicacion',
         message: 'Ingresar la ubicacion de la foto'
     },
 
     {
         type: 'input',
         name: 'Fecha',
-        message: 'Ingresar la fecha de la captura'
+        message: 'Ingresar la fecha de la captura (dd/mm/yyyy)'
     }
 ]
 
-const Escritura = (contenidoArchivo) => {
+const Lectura = (nombreArchivo) => {
     return new Promise(
         (resolve, reject) => {
-            resolve(                //Promesa
+            fs.readFile(
+                nombreArchivo,
+                'utf-8',
+                (err, contenidoLeidoDelArchivo) => {
+                    if (err) {
+                        reject(err);
+                        console.log('err')
+                    } else {
+                        resolve(contenidoLeidoDelArchivo)
+                    }
+
+                }
+            )
+        }
+    )
+};
+
+const Escritura = (contenidoArchivo) => {
+    return new Promise(     //Promesa 1
+        (resolve, reject) => {
+            resolve(                //Promesa 2
                 Lectura('galeria.txt')
                     .then(respuesta=>{
                         fs.writeFile(
@@ -82,26 +102,6 @@ const Escritura = (contenidoArchivo) => {
     )
 };
 
-const Lectura = (nombreArchivo) => {
-    return new Promise(
-        (resolve, reject) => {
-            fs.readFile(
-                nombreArchivo,
-                'utf-8',
-                (err, contenidoLeidoDelArchivo) => {
-                    if (err) {
-                        reject(err);
-                        console.log('err')
-                    } else {
-                        resolve(contenidoLeidoDelArchivo)
-                    }
-
-                }
-            )
-        }
-    )
-};
-
 
 
 inquirer.prompt([menuFotos]).then((respuesta)=>{
@@ -112,7 +112,7 @@ inquirer.prompt([menuFotos]).then((respuesta)=>{
         case 'Ingresar foto':
             inquirer.prompt(atributosFoto).then((respuesta)=>{  //Solo para menus el inquirer
                 const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta)))  //Objeto JSON y me transforma a string
-                escribirArchivo$.subscribe(respuest=>{
+                escribirArchivo$.subscribe(respuest=>{     //todo es Promesa transformada a observable
                 })
             })
             break

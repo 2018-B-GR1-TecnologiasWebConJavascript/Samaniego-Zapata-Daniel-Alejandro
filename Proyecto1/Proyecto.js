@@ -34,8 +34,10 @@ const atributosFoto = [
     }
 ];
 const Escritura = (contenidoArchivo) => {
-    return new Promise((resolve, reject) => {
-        resolve(Lectura('galeria.txt')
+    return new Promise(//Promesa 1
+    (resolve, reject) => {
+        resolve(//Promesa 2
+        Lectura('galeria.txt')
             .then(respuesta => {
             fs.writeFile("galeria.txt", respuesta + '\n' + contenidoArchivo, (err) => {
                 if (err) {
