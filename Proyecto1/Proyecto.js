@@ -18,48 +18,25 @@ const menuFotos = {
 };
 const atributosFoto = [
     {
-        name: 'nombre',
+        name: 'Nombre',
         type: 'input',
         message: 'Ingresar el nombre de la foto'
     },
     {
         type: 'input',
-        name: 'ubicacion',
+        name: 'Ubicacion',
         message: 'Ingresar la ubicacion de la foto'
     },
     {
         type: 'input',
         name: 'Fecha',
-        message: 'Ingresar la fecha de la captura'
+        message: 'Ingresar la fecha de la captura (dd/mm/yyyy)'
     }
 ];
-const Escritura = (contenidoArchivo) => {
-    return new Promise(//Promesa 1
-    (resolve, reject) => {
-        resolve(//Promesa 2
-        Lectura('galeria.txt')
-            .then(respuesta => {
-            fs.writeFile("galeria.txt", respuesta + '\n' + contenidoArchivo, (err) => {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve({ mesaje: "Ingresado correctamente" });
-                }
-            });
-        })
-            .catch(respuesta => {
-            fs.writeFile("galeria.txt", contenidoArchivo, (err) => {
-                if (err) {
-                    reject(err);
-                }
-                else {
-                    resolve({ mesaje: "Ingresado correctamente" });
-                }
-            });
-        }));
-        reject({ mensaje: 'error' });
-    });
+const buscarFoto = {
+    type: 'input',
+    name: 'buscarFoto',
+    message: 'Buscar foto'
 };
 const Lectura = (nombreArchivo) => {
     return new Promise((resolve, reject) => {
@@ -74,12 +51,67 @@ const Lectura = (nombreArchivo) => {
         });
     });
 };
+const Escritura = (foto, nombreArchivo) => {
+    return new Promise(((resolve, reject) => {
+        fs.writeFile(nombreArchivo, foto, (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve({
+                    mesaje: "Ingresado correctamente",
+                    foto
+                });
+            }
+        });
+    }));
+};
+// const EscrituraYLectura = (contenidoArchivo) => {
+//     return new Promise(     //Promesa 1
+//         (resolve, reject) => {
+//             resolve(                //Promesa 2
+//                 Lectura('galeria.txt')
+//                     .then(respuesta=>{
+//                         fs.writeFile(
+//                             "galeria.txt",
+//                             respuesta +'\n'+ contenidoArchivo,
+//                             (err) => {
+//                                 if (err){
+//                                     reject (err);
+//                                 } else{
+//                                     resolve ({mesaje: "Ingresado correctamente"});
+//                                 }
+//                             }
+//                         )
+//                     })
+//                     .catch(respuesta=>{
+//                         fs.writeFile(
+//                             "galeria.txt",
+//                             contenidoArchivo,
+//                             (err) => {
+//                                 if (err){
+//                                     reject (err);
+//                                 } else{
+//                                     resolve ({mesaje: "Ingresado correctamente"});
+//                                 }
+//                             }
+//                         )
+//                     })
+//
+//             )
+//             reject(
+//                 {mensaje:'error'}
+//             )
+//
+//         }
+//     )
+// };
 inquirer.prompt([menuFotos]).then((respuesta) => {
     console.log(respuesta.itemMenu);
     switch (respuesta.itemMenu) {
         case 'Ingresar foto':
             inquirer.prompt(atributosFoto).then((respuesta) => {
-                const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta))); //Objeto JSON y me transforma a string
+                const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre)); //Objeto JSON y me transforma a string
                 escribirArchivo$.subscribe(respuest => {
                 });
             });
@@ -91,9 +123,28 @@ inquirer.prompt([menuFotos]).then((respuesta) => {
                 /*console.log(JSON.parse(respuesta))*/ //Coge una string y me transforma en JSON
             });
             break;
-        case 'Eliminar nombre de la foto':
+        case 'Eliminar fotos':
+            inquirer.prompt([buscarFoto]).then((respuesta) => {
+                fs.unlink('./' + respuesta.buscarFoto, (err) => {
+                    if (err)
+                        throw err;
+                    console.log('Foto eliminada ' + respuesta.buscarFoto);
+                });
+            });
             break;
-        case 'Modificar nombre de la foto':
+        case 'Modificar fotos':
+            inquirer.prompt([buscarFoto]).then((respuesta) => {
+                fs.unlink('./' + respuesta.buscarFoto, (err) => {
+                    if (err)
+                        throw err;
+                    inquirer.prompt(atributosFoto).then((respuesta) => {
+                        const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre)); //Objeto JSON y me transforma a string
+                        escribirArchivo$.subscribe(respuest => {
+                            console.log('Foto modificada correctamente');
+                        });
+                    });
+                });
+            });
             break;
     }
 });
