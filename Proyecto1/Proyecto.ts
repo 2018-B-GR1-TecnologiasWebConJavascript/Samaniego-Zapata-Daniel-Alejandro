@@ -1,5 +1,3 @@
-/*import {from} from "rxjs";*/
-
 declare var require;
 const inquirer  = require('inquirer');
 const fs = require('fs');
@@ -87,49 +85,6 @@ const Escritura = (foto, nombreArchivo) => {
     )
 };
 
-// const EscrituraYLectura = (contenidoArchivo) => {
-//     return new Promise(     //Promesa 1
-//         (resolve, reject) => {
-//             resolve(                //Promesa 2
-//                 Lectura('galeria.txt')
-//                     .then(respuesta=>{
-//                         fs.writeFile(
-//                             "galeria.txt",
-//                             respuesta +'\n'+ contenidoArchivo,
-//                             (err) => {
-//                                 if (err){
-//                                     reject (err);
-//                                 } else{
-//                                     resolve ({mesaje: "Ingresado correctamente"});
-//                                 }
-//                             }
-//                         )
-//                     })
-//                     .catch(respuesta=>{
-//                         fs.writeFile(
-//                             "galeria.txt",
-//                             contenidoArchivo,
-//                             (err) => {
-//                                 if (err){
-//                                     reject (err);
-//                                 } else{
-//                                     resolve ({mesaje: "Ingresado correctamente"});
-//                                 }
-//                             }
-//                         )
-//                     })
-//
-//             )
-//             reject(
-//                 {mensaje:'error'}
-//             )
-//
-//         }
-//     )
-// };
-
-
-
 inquirer.prompt([menuFotos]).then((respuesta)=>{
 
     console.log(respuesta.itemMenu)
@@ -138,7 +93,7 @@ inquirer.prompt([menuFotos]).then((respuesta)=>{
         case 'Ingresar foto':
             inquirer.prompt(atributosFoto).then((respuesta)=>{  //Solo para menus el inquirer
                 const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre))  //toda la promesa  y los parametros .. respuesta .. los datos que meto ... y respuesta.Nombre coge el nombre de la foto y lo guarda con el mismo nombre en un archivo.... Objeto JSON y me transforma a string
-                escribirArchivo$.subscribe(respuest=>{     //todo es Promesa transformada a observable
+                escribirArchivo$.subscribe(respuest=>{                          //todo es Promesa a observable
                 })
             })
             break
@@ -172,9 +127,6 @@ inquirer.prompt([menuFotos]).then((respuesta)=>{
                     })
                 })
                 })
-
-
                 break
     }
-
 })
