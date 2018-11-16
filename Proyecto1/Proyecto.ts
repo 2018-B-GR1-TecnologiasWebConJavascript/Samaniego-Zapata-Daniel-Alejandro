@@ -25,13 +25,11 @@ const atributosFoto = [
         type: 'input',
         message: 'Ingresar el nombre de la foto'
     },
-
     {
         type: 'input',
         name: 'Ubicacion',
         message: 'Ingresar la ubicacion de la foto'
     },
-
     {
         type: 'input',
         name: 'Fecha',
