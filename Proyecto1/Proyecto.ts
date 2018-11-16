@@ -1,5 +1,3 @@
-/*import {from} from "rxjs";*/
-
 declare var require;
 const inquirer  = require('inquirer');
 const fs = require('fs');
@@ -23,64 +21,29 @@ const menuFotos = {
 
 const atributosFoto = [
     {
-        name: 'nombre',
+        name: 'Nombre',
         type: 'input',
         message: 'Ingresar el nombre de la foto'
     },
 
     {
         type: 'input',
-        name: 'ubicacion',
+        name: 'Ubicacion',
         message: 'Ingresar la ubicacion de la foto'
     },
 
     {
         type: 'input',
         name: 'Fecha',
-        message: 'Ingresar la fecha de la captura'
+        message: 'Ingresar la fecha de la captura (dd/mm/yyyy)'
     }
 ]
 
-const Escritura = (contenidoArchivo) => {
-    return new Promise(
-        (resolve, reject) => {
-            resolve(                //Promesa
-                Lectura('galeria.txt')
-                    .then(respuesta=>{
-                        fs.writeFile(
-                            "galeria.txt",
-                            respuesta +'\n'+ contenidoArchivo,
-                            (err) => {
-                                if (err){
-                                    reject (err);
-                                } else{
-                                    resolve ({mesaje: "Ingresado correctamente"});
-                                }
-                            }
-                        )
-                    })
-                    .catch(respuesta=>{
-                        fs.writeFile(
-                            "galeria.txt",
-                            contenidoArchivo,
-                            (err) => {
-                                if (err){
-                                    reject (err);
-                                } else{
-                                    resolve ({mesaje: "Ingresado correctamente"});
-                                }
-                            }
-                        )
-                    })
-
-            )
-            reject(
-                {mensaje:'error'}
-            )
-
-        }
-    )
-};
+const buscarFoto = {
+    type: 'input',
+    name: 'buscarFoto',
+    message: 'Buscar foto'
+}
 
 const Lectura = (nombreArchivo) => {
     return new Promise(
@@ -102,7 +65,25 @@ const Lectura = (nombreArchivo) => {
     )
 };
 
-
+const Escritura = (foto, nombreArchivo) => {
+    return new Promise(((resolve, reject) => {
+        fs.writeFile(
+            nombreArchivo,
+            foto,
+            (err) => {
+                if (err){
+                    reject(err);
+                } else{
+                    resolve({
+                        mesaje: "Ingresado correctamente",
+                        foto
+                    })
+                }
+        }
+        )
+        })
+    )
+};
 
 inquirer.prompt([menuFotos]).then((respuesta)=>{
 
@@ -111,8 +92,8 @@ inquirer.prompt([menuFotos]).then((respuesta)=>{
     switch (respuesta.itemMenu) {
         case 'Ingresar foto':
             inquirer.prompt(atributosFoto).then((respuesta)=>{  //Solo para menus el inquirer
-                const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta)))  //Objeto JSON y me transforma a string
-                escribirArchivo$.subscribe(respuest=>{
+                const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre))  //toda la promesa  y los parametros .. respuesta .. los datos que meto ... y respuesta.Nombre coge el nombre de la foto y lo guarda con el mismo nombre en un archivo.... Objeto JSON y me transforma a string
+                escribirArchivo$.subscribe(respuest=>{                          //todo es Promesa a observable
                 })
             })
             break
@@ -124,10 +105,28 @@ inquirer.prompt([menuFotos]).then((respuesta)=>{
             })
 
             break
-        case 'Eliminar nombre de la foto':
-            break
-        case 'Modificar nombre de la foto':
-            break
-    }
+        case 'Eliminar fotos':
+            inquirer.prompt([buscarFoto]).then((respuesta)=>{
+                fs.unlink('./'+respuesta.buscarFoto, (err) => {
+                        if (err) throw err;
 
+                        console.log('Foto eliminada ' + respuesta.buscarFoto);
+                    })
+            });
+
+            break
+        case 'Modificar fotos':
+            inquirer.prompt([buscarFoto]).then((respuesta)=>{
+                fs.unlink('./'+respuesta.buscarFoto, (err) => {
+                    if (err) throw err;
+                    inquirer.prompt(atributosFoto).then((respuesta) => {  //Solo para menus el inquirer
+                        const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre))  //Objeto JSON y me transforma a string
+                        escribirArchivo$.subscribe(respuest => {     //todo es Promesa transformada a observable
+                            console.log('Foto modificada correctamente')
+                        })
+                    })
+                })
+                })
+                break
+    }
 })
