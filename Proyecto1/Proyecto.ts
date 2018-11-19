@@ -3,6 +3,13 @@ const inquirer  = require('inquirer');
 const fs = require('fs');
 const rxjs = require('rxjs');
 const fotoAGuardar = {};
+const mergeMap = require('rxjs/operators').mergeMap;
+
+map (     //MODIFICA ALTERA ARREGLO
+    ()=>{
+        return {}
+    }
+)
 
 console.log('Bienvenido Fotos del Mundo');
 
@@ -127,4 +134,34 @@ inquirer.prompt([menuFotos]).then((respuesta)=>{
                 })
                 break
     }
-})
+});
+
+// EJEMPLO DE OBSERVABLE DEL CÒDIGO
+
+function leerBDD(){
+    return new Promise(
+        ((resolve, reject) => {
+            fs.readFile(
+                'bdd.json',
+                'utf-8',
+                (error, contenidoArchivo) => {
+                    bdd: null})
+        })
+    )
+};
+
+function main() {
+    console.log("Empezo");
+
+    // 1) SI EXISTE EL ARCHIVO, LEER, SINO CREAR
+
+    // 2) PREGUNTO QUE QUIERE HACER -> CREAR
+
+    // 3) PREGUNTAR LOS DATOS -> DATOS NUEVO REGISTRO
+
+    // 4) ACCIÓN!
+
+    // 5) GURADAR LA BASE DE DATOS
+
+
+}
