@@ -66,52 +66,12 @@ const Escritura = (foto, nombreArchivo) => {
         });
     }));
 };
-// const EscrituraYLectura = (contenidoArchivo) => {
-//     return new Promise(     //Promesa 1
-//         (resolve, reject) => {
-//             resolve(                //Promesa 2
-//                 Lectura('galeria.txt')
-//                     .then(respuesta=>{
-//                         fs.writeFile(
-//                             "galeria.txt",
-//                             respuesta +'\n'+ contenidoArchivo,
-//                             (err) => {
-//                                 if (err){
-//                                     reject (err);
-//                                 } else{
-//                                     resolve ({mesaje: "Ingresado correctamente"});
-//                                 }
-//                             }
-//                         )
-//                     })
-//                     .catch(respuesta=>{
-//                         fs.writeFile(
-//                             "galeria.txt",
-//                             contenidoArchivo,
-//                             (err) => {
-//                                 if (err){
-//                                     reject (err);
-//                                 } else{
-//                                     resolve ({mesaje: "Ingresado correctamente"});
-//                                 }
-//                             }
-//                         )
-//                     })
-//
-//             )
-//             reject(
-//                 {mensaje:'error'}
-//             )
-//
-//         }
-//     )
-// };
 inquirer.prompt([menuFotos]).then((respuesta) => {
     console.log(respuesta.itemMenu);
     switch (respuesta.itemMenu) {
         case 'Ingresar foto':
             inquirer.prompt(atributosFoto).then((respuesta) => {
-                const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre)); //Objeto JSON y me transforma a string
+                const escribirArchivo$ = rxjs.from(Escritura(JSON.stringify(respuesta), respuesta.Nombre)); //toda la promesa  y los parametros .. respuesta .. los datos que meto ... y respuesta.Nombre coge el nombre de la foto y lo guarda con el mismo nombre en un archivo.... Objeto JSON y me transforma a string
                 escribirArchivo$.subscribe(respuest => {
                 });
             });
