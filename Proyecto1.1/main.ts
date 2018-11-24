@@ -198,11 +198,11 @@ function preguntarDatos() {
             switch (respuesta.opcionMenu.opcionMenu) {
                 case 'Crear':
                     return rxjs
-                        .from(inquirer.prompt(preguntaUsuario))
+                        .from(inquirer.prompt(preguntaRegistroImagen))
                         .pipe(
                             map(
-                                (usuario: Usuario) => {
-                                    respuesta.usuario = usuario;
+                                (foto: Foto) => {
+                                    respuesta.foto = foto;
                                     return respuesta;
                                 }
                             )
@@ -213,16 +213,142 @@ function preguntarDatos() {
     );
 }
 
-interface preguntaRegistroImagen {
-    Nombre: string;
-    Ubicacion: string;
-    Fecha: string;
+function actualizarBDD() {
+    return mergeMap(
+        (respuesta: RespuestaLeerBDD) => {
+            return rxjs.from(guardarBDD(respuesta.bdd));
+        }
+    );
+}
+
+
+function ejecutarAccion() {
+    return map(
+        (respuesta: RespuestaLeerBDD) => {
+            respuesta.bdd.usuarios.push(respuesta.foto);
+            return respuesta;
+        }
+    );
+}
+
+function anadirFoto(foto) {
+    return new Promise(
+        (resolve, reject) => {
+            fs.readFile('bdd.json', 'utf-8',
+                (err, contenido) => {
+                    if (err) {
+                        reject({mensaje: 'Error leyendo'});
+                    } else {
+                        const bdd = JSON.parse(contenido);
+
+
+                        bdd.usuarios.push(foto);
+
+
+                        fs.writeFile(
+                            'bdd.json',
+                            JSON.stringify(bdd),
+                            (err) => {
+                                if (err) {
+                                    reject(err);
+                                } else {
+                                    resolve({mensaje: 'Usuario Creado'});
+                                }
+                            }
+                        );
+                    }
+                });
+        }
+    );
+}
+
+function editarFoto(nombre, nuevoNombre) {
+    return new Promise(
+        (resolve, reject) => {
+            fs.readFile('bdd.json', 'utf-8',
+                (err, contenido) => {
+                    if (err) {
+                        reject({mensaje: 'Error leyendo'});
+                    } else {
+                        const bdd = JSON.parse(contenido);
+
+
+                        const indiceFoto = bdd.usuarios
+                            .findIndex(
+                                (foto) => {
+                                    return foto.nombre = nombre;
+                                }
+                            );
+
+                        bdd.usuarios[indiceFoto].nombre = nuevoNombre;
+
+
+                        fs.writeFile(
+                            'bdd.json',
+                            JSON.stringify(bdd),
+                            (err) => {
+                                if (err) {
+                                    reject(err);
+                                } else {
+                                    resolve({mensaje: 'Usuario Editado'});
+                                }
+                            }
+                        );
+                    }
+                });
+        }
+    );
+}
+
+function buscarFotoPorNombre(nombre) {
+    return new Promise(
+        (resolve, reject) => {
+            fs.readFile('bdd.json', 'utf-8',
+                (err, contenido) => {
+                    if (err) {
+                        reject({mensaje: 'Error leyendo'});
+                    } else {
+                        const bdd = JSON.parse(contenido);
+
+                        const respuestaFind = bdd.usuarios
+                            .find(
+                                (foto) => {
+                                    return foto.nombre === nombre;
+                                }
+                            );
+
+                        resolve(respuestaFind);
+                    }
+                });
+        }
+    );
+}
+
+main();
+
+
+interface RespuestaLeerBDD {
+    mensaje: string;
+    bdd?: BaseDeDatos;
+    opcionMenu?: OpcionMenu;
+    foto?: Foto;
+}
+
+export interface BaseDeDatos {
+    imagenes: Foto[];
 }
 
 interface Foto {
     id: number;
     nombre: string;
 }
+
+interface preguntaRegistroImagen {
+    Nombre: string;
+    Ubicacion: string;
+    Fecha: string;
+}
+
 
 interface OpcionMenu {
     opcionMenu:
@@ -232,9 +358,7 @@ interface OpcionMenu {
         'Buscar';
 }
 
-export interface BaseDeDatos {
-    imagenes: Foto[];
-}
+
 
 
 
