@@ -2,7 +2,7 @@
 declare var require;
 const inquirer = require('inquirer');
 const fs = require('fs');
-const rxjs = require('rxjs');
+const rxjs = require('rxjs');    // npm install rxjs
 const mergeMap = require('rxjs/operators').mergeMap;
 const map = require('rxjs/operators').map;
 
@@ -110,12 +110,19 @@ function main() {
     */
 }
 
-function inicializarBase(){
-    return new Promise(
-        (resolve, reject) => {
+function inicializarBase():Observable<>{
 
-        }
-    )
+    const bddLeida$ = rxjs.from(leerBDD());
+
+    bddLeida$
+        .pipe(
+
+        )
+
+       /* (resolve, reject) => {
+
+        };*/
+
 }
 
 function leerBDD(){
@@ -146,7 +153,7 @@ function crearBDD() {
     const contenido = '{"usuarios":[], "mascotas":[]}';
     return new Promise(
         (resolve, reject) => {
-            fs.writeFile()=>(
+            fs.writeFile(
                 'bdd.json',
                 contenido,
                     (error)=>{
@@ -158,11 +165,11 @@ function crearBDD() {
                         }else {
                             resolve({
                                 mensaje: 'BDD creada',
-                                bdd:JSON.parse(contenido)
-                            })
+                                bdd:JSON.parse(contenido)   //String a Objeto
+                            });
                         }
                     }
-            )
+            );
         });
 }
 
