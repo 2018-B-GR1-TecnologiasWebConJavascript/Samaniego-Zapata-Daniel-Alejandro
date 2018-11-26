@@ -40,25 +40,7 @@ const preguntaRegistroImagen = [
 function main() {
     console.log('Empezo');
 
-    inicializarBase()
-        .pipe(
-            preguntarOpcionesMenu(),
-            preguntarDatos(),
-            ejecutarAccion(),
-            actualizarBDD()
-        )
-        .subscribe(
-            (respuesta) => {
-                console.log(respuesta);
-            },
-            (error) => {
-                console.log(error);
-            },
-            () => {
-                console.log('complete');
-                main();
-            }
-        );
+
 
     // ------- 1) Si existe el archivo, leer, sino crear
 
