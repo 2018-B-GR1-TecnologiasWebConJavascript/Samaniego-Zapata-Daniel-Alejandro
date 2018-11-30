@@ -1,38 +1,4 @@
-//holaMundo();
-
-function holamundo(){
-    console.log("Hola Mundo");
-}
-
-console.log("Hola Mundo");
-
-function sumarDosNumeros(numeroUno, numeroDos){
-    //return"";
-    var numeroUnoEsValido = typeof numeroUno == 'number';
-    var numeroDosEsValido = typeof numeroDos == 'number';
-    if(numeroUnoEsValido && numeroDosEsValido){
-        return numeroUno + numeroDos;
-    } else{
-        console.error('Parametros no son numeros');
-        return 0;
-    }
-}
-
-console.log(sumarDosNumeros(1, 2, 3, 4, 5, 6, 7)); //3
-
-console.log(sumarDosNumeros(true, 0, undefined, null, "asd", 6, 7)); //3
-
-//Destructuracion
-//function sumarNNumeros(...numeros){
-//    console.log(numeros);
-//}
-
-//console.log(sumarNNumeros(1,2,3,4,5,6));
-function sumarNNumeros(...numeros) {
-    var resultado = calcularResultadoSumarNNumeros(numeros);
-    if (resultado.esValido) {
-// Javascript puede ejecutar funciones en cualquier estancia del codigo,
-//ya sea antes de que se declare la funcion
+//JavaScript puede ejecutar funciones en cualquier estancia del codigo, ya sea antes de que se declare la funcion
 
 holaMundo();
 
@@ -40,222 +6,177 @@ function holaMundo() {
     console.log("Hola Mundo");
 }
 
-
-// En javascript las funciones devuelven undifined o lo que tengan en el return
+//En JavaScript las funciones devuelven undefined o lo que tengan en el return
 
 console.log(holaMundo());
 
-function sumaDosNumeros(numeroUno, numeroDos) {
+function sumarDosNumeros(numeroUno, numeroDos)  {
     var numeroUnoEsValido = typeof numeroUno == 'number';
     var numeroDosEsValido = typeof numeroDos == 'number';
 
-    if(numeroUnoEsValido && numeroDosEsValido){
+    if (numeroUnoEsValido && numeroDosEsValido){
         return numeroUno + numeroDos;
-    } else {
+    }  else {
         console.error('Parametros no son numeros')
         return 0;
     }
     return numeroUno + numeroDos;
 }
 
-console.log(sumaDosNumeros(1,2,3,4,5));
+console.log(sumarDosNumeros(1,2,3,4,5));
 
-console.log(sumaDosNumeros(true, 0, undefined, null, "asd", 3,4,5)); //3
+console.log(sumarDosNumeros(true ,0, [],3,4,5));
 
-// Los parametros que llegan a las funciones llegan con arreglos
-
-
-function sumarNNumeros(...numeros){
-
-// Destructuracion de argumentos
-
+/*Los parametros que llegan a las funciones llegan como arreglos
+function sumarNNumeros(...numeros) {//Destructuracion de argumentos
     var resultado = calcularResultadoSumarNNumeros(numeros);
-
-    if(resultado.esValido){
-
+    if (resultado.esValido){
         return resultado.suma;
     } else {
         return 0;
     }
-}
-
-function sumarNNumeros(...numeros){
-    var suma = 0;
-    var todoLosNumerosSonValidos = true;
-
     //console.log(numeros);
 }
-
-
-function calcularResultadoSumarNNumeros(numeros) {
+function calcularResultadoSumarNNumeros (numeros) {
     var suma = 0;
     var todosLosNumerosSonValidos = true;
-
-    for(var i=0; i < numeros.length; i++){
-        var numeroEsValido = typeof numeros[i] == 'number';
-        if(numeroEsValido){
+    for (var i=0; i< numeros.length; i++){
+        numeroEsValido = typeof numeros[i] == 'number';
+        if (numeroEsValido){
             suma = suma + numeros[i];
         } else {
-            todoLosNumerosSonValidos = false;
             todosLosNumerosSonValidos = false;
             break;
         }
     }
-    var resultado = {
-        suma: suma,
-
-        esValido: todoLosNumerosSonValidos
-    };
-    return resultado;
 }
-console.log(sumarNNumeros(true, 1,2,3));
+console.log(sumarNNumeros(true,1,2,3));
+*/
 
-// Utilizar variables dentro de esas comillas raras ``
-function saludar(nombre, funcion){
-    //funcion();
-    //return `Hola ${nombre.toUpperCase()}`;
-    return `Hola ${funcion(nombre)}`;
-}
 
-console.log(saludar("adrian", holamundo));
-        esValido: todosLosNumerosSonValidos
-    };
-    return resultado;
-}
-
-console.log(sumarNNumeros(true, 1, 2, 3));
-
+//Javascript permite mandar funciones como parametros
 function saludar(nombre, funcion) {
     //funcion();
     return `Hola ${funcion(nombre)}`;
 }
 
-
-console.log(saludar("aDrIaN", holaMundo)); //definicion de una funcion sin ()
+console.log(saludar("aDrIaN", holaMundo)); //definicion de una funcion, sin ()
 
 console.log(saludar("AdRian", nombreEnMayusculas));
 console.log(saludar("AdRian", nombreEnMinusculas));
 console.log(saludar("AdRian", nombreConPuntoAlFinal));
 
-function nombreEnMayusculas(nombre){
+function nombreEnMayusculas(nombre) {
     return nombre.toUpperCase();
 }
 
-function nombreEnMinusculas(nombre){
+function nombreEnMinusculas(nombre) {
     return nombre.toLowerCase();
 }
 
-function nombreConPuntoAlFinal(nombre){
+function nombreConPuntoAlFinal(nombre) {
     return nombre + ".";
 }
 
-console.log(saludar("adrian", nombreEnMayusculas));
-console.log(saludar("adrian", nombreEnMinusculas));
-console.log(saludar("adrian", nombreConPuntoAlFinal));
-
-var arreglo = [1,2,3];
-
-arreglo.findIndex(
-    function(valorDelArreglo,indice,arreglo){
-
-var arreglo = [1, 2, 3, 1, 1];
-
-arreglo.findIndex(
-    function (valorDelArreglo, indice, arreglo){
-        return 2;
-    }
-); //1
-
-function restar (a, b){
-    return a-b;
+function restar(a,b) {
+    return a - b;
 }
 
-console.log(restar(4, 2)); //Ejecucion 2
-console.log(typeof restar);    //Tipo funcion = function
-console.log(restar);  //DEFINICION DE LA FUNCION
+console.log(restar(4,2));   // Ejecucion undefined
+console.log(typeof restar); // Tipo Funcion
+console.log(restar);        // Definicion de la funcion
 
-// Anonymous function
+//ANONYMOUS FUNCTION
 
-function nombre(){
+function nombre() {}
 
-}
-var ejemplo = function nombreDos() {};    // funcion anonima
+//Funcion anonima dentro de una variable
+var ejemplo = function (){}
 
-var adrian = {
-    trabajo: function(){
-        //implementacion
-    }
-};
-adrian.trabajo();
+//Igualar a una propiedad de un objeto
+var adrian = {trabajo:function (){
+        //Implementacion
+    }}
 
-var arreglo = [
-    function () {
-            //implememtacion
-    }
-];
-arreglo[0]();
+adrian.trabajo()
 
+// Usar dentro de arreglos
+var arreglo = [ function () {
+    //implementacion
+}]
 
-saludar("Maria", function (nombre){
-    return nombre + "Eguez"
+arreglo [0]();
+
+//Enviar directamente la funcion como parametro
+saludar("Maria", function (nombre) {
+    return nombre + "Eguez";
 });
 
+//TIPOS DE VARIABLES
 
-//  TIPOS DE VARIABLES
+var variable; //Nunca mas
 
-var variable; //nunca màs escribir
 
-let variablesDos = 2;   //
-variableDos = 3;    //Puedo reasignarle
+let variablesDos = 2;
+variablesDos = 3; // = ... Puede ser igalada a otra cosa
 
-const edad = 29;  //No puede ser reasignada .... SIEMPRE QUE SE PUEDA USAR
-// edad = 30
+const edad = 29; //Siempre que se pueda usar esta, amenos que se necesite de una reasignacion
+// edad = 30;
 
 const vicente = {
-    nombre: 'Vicente'
-};
-vicente.nombre = 'Adrian';
-/*vicente = {
-    algo:'mas'
-};*/
+    nombre:'Vicente'
+}
+
+vicente.nombre = 'Washo';
 vicente.isPrototypeOf();
 vicente.hasOwnProperty();
+/*vicente = {
+    algo:mas
+}*/
 
-const arregloUnoDos = [1,2];
+//Si se puede usar funciones en la variable de tipo contaste
+const
+    arregloUnoDos =[1,2];
+
 arregloUnoDos[0] = 3;
-//arregloUnoDos = [1,2,3,4,5];
+arregloUnoDos.push(3);
 
-const Nnombre = 'Adrian';
+
+//arregloUnoDos = [1,2,3,4];
+
+const nombre = 'Adrian';
 //nombre = 'Vicente';
 
 const casado = true;
-//casado = false;
+// casado = false;
 
 const hijos = null;
-//hijos = 1;
+// hijos = 1;
 
-/*const ganarDinero = function () {
+const ganarDinero = function () {
+    return 1;
+}
+
+/* ganarDinero() = function () {
     return 2;
-};
-*/
+} */
 
-// NUNCA VAMOS A USAR FUNCIONES ANÒNIMAS
+// NUNCA VAMOS A USAR LAS FUNCIONES ANONIMAS
+
+const elevarAlCuadrado = function (numero) {
+    return numero * numero;
+}
+
+// FAT ARROW FUNCTION  ->   =>
 
 const elevarAlCuadrado = (numero) => {
     return numero * numero;
-};
+}
 
-//Closher es donde yo puedo usar alas variables
-
-//FAT ARROW FUNCTION   ->      =>
-//o FUNCIONES DE FLECHA GORDA   .... VARIABLES, OBJETOS,
-// PARAMETROS DE FUNCIONES Y EN UN ARREGLO SE PUEDE USAR
-//FUNCIONES ANONIMAS
+// Si se tiene una sola linea se puede omitir las llaves, return y parentesis.
 
 const elevarAlCuadradoV2 = (numero) => numero * numero;
 
 const elevarAlCuadradoV3 = numero => numero * numero;
 
-const restarDosNumeros = (numUno, numDos) => numUno - numDos;
-
-//15.10.2018
+const restarDosNumeros = (numUno,numDos) => numUno - numDos;
