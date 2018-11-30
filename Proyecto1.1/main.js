@@ -8,7 +8,7 @@ const preguntaMenu = {
     name: 'opcionMenu',
     message: 'Escoja una opción: ',
     choices: [
-        'Ingresa Foto',
+        'Ingresar Foto',
         'Borrar Foto',
         'Buscar Foto',
         'Actualizar Foto',
@@ -27,19 +27,6 @@ const ingresarFotos = [{
         type: 'input',
         message: 'Ingrese la fecha de la captura (dd/mm/yyyy): '
     }];
-// const ingresarProductos = [{
-//     name: 'nombre',
-//     type: 'input',
-//     message: 'Ingrese el nombre del producto: '
-// },{
-//     name: 'categoria',
-//     type: 'input',
-//     message: 'Ingrese la categoria del producto: '
-// },{
-//     name: 'precio',
-//     type: 'input',
-//     message: 'Ingrese el precio del producto: '
-// }];
 const preguntaBuscarFoto = [
     {
         type: 'input',
@@ -47,13 +34,6 @@ const preguntaBuscarFoto = [
         message: 'Ingrese el nombre de la foto: ',
     }
 ];
-// const preguntaBuscarProducto = [
-//     {
-//         type: 'input',
-//         name: 'nombre',
-//         message: 'Ingrese el nombre del producto',
-//     }
-// ];
 const preguntaEdicionFoto = [{
         name: 'nombre',
         type: 'input',
@@ -67,25 +47,12 @@ const preguntaEdicionFoto = [{
         type: 'input',
         message: 'Ingrese la nueva fecha de captura de la foto: '
     }];
-// const preguntaEdicionProducto = [{
-//     name: 'nombre',
-//     type: 'input',
-//     message: 'Ingrese el nuevo nombre del producto: '
-// }, {
-//     name: 'categoria',
-//     type: 'input',
-//     message: 'Ingrese la nueva categoria del producto: '
-// }, {
-//     name: 'precio',
-//     type: 'input',
-//     message: 'Ingrese el nuevo precio del producto: '
-// }];
 function inicialiarBDD() {
     // @ts-ignore
     return new Promise((resolve, reject) => {
         fs.readFile('bdd.json', 'utf-8', (error, contenidoArchivo) => {
             if (error) {
-                fs.writeFile('bdd.json', '{"fotos":[]}', //'{"productos":[]}',
+                fs.writeFile('bdd.json', '{"fotos":[]}', //
                 (error) => {
                     if (error) {
                         reject({
@@ -96,7 +63,7 @@ function inicialiarBDD() {
                     else {
                         resolve({
                             mensaje: 'BDD leida',
-                            bdd: JSON.parse('{"fotos":[]}') // bdd: JSON.parse('{"productos":[]}')
+                            bdd: JSON.parse('{"fotos":[]}')
                         });
                     }
                 });
@@ -116,8 +83,8 @@ function main() {
         .pipe(preguntarOpcionesMenu(), opcionesRespuesta(), ejecutarAcccion(), guardarBaseDeDatos())
         .subscribe((data) => {
         //
-        console.log("\n*************Base Final*****************\n");
-        console.log(data.bdd.fotos); //console.log(data.bdd.productos)
+        console.log("\n*************Base Final de Fotos*****************\n");
+        console.log(data.bdd.fotos);
     }, (error) => {
         //
         console.log(error);
@@ -157,11 +124,10 @@ function opcionesRespuesta() {
     return mergeMap((respuestaBDD) => {
         const opcion = respuestaBDD.opcionMenu.opcionMenu;
         switch (opcion) {
-            case 'Ingresar Foto': //case '1.- Crear Producto':
-                return rxjs
-                    .from(inquirer.prompt(ingresarFotos)) //.from(inquirer.prompt(ingresarProductos))
+            case 'Ingresar Foto':
+                return rxjs.from(inquirer.prompt(ingresarFotos))
                     .pipe(map((foto) => {
-                    respuestaBDD.foto = foto; //respuestaBDD.producto = producto;
+                    respuestaBDD.foto = foto;
                     return respuestaBDD;
                 }));
             case 'Borrar Foto':
@@ -172,14 +138,6 @@ function opcionesRespuesta() {
                 break;
             case 'Actualizar Foto':
                 return preguntarNombre(respuestaBDD);
-            // case '3.- Buscar Producto':
-            //     return buscarProducto(respuestaBDD);
-            //     break;
-            // case '4.- Actualizar Producto':
-            //     return preguntarNombre(respuestaBDD);
-            // case '2.- Borrar Producto':
-            //     return borrarProducto(respuestaBDD);
-            //     break;
         }
     });
 }
@@ -212,29 +170,6 @@ function ejecutarAcccion() {
         }
     });
 }
-// function ejecutarAcccion() {
-//     return map( // Respuesta del anterior OBS
-//         (respuestaBDD: RespuestaBDD) => {
-//             const opcion = respuestaBDD.opcionMenu.opcionMenu;
-//             switch (opcion) {
-//                 case '1.- Crear Producto':
-//                     const producto = respuestaBDD.producto;
-//                     respuestaBDD.bdd.productos.push(producto);
-//                     return respuestaBDD;
-//                 case '4.- Actualizar Producto':
-//                     const indice = respuestaBDD.indiceUsuario;
-//                     respuestaBDD.bdd.productos[indice].nombre = respuestaBDD.producto.nombre;
-//                     respuestaBDD.bdd.productos[indice].categoria = respuestaBDD.producto.categoria;
-//                     respuestaBDD.bdd.productos[indice].precio= respuestaBDD.producto.precio;
-//                     return respuestaBDD;
-//                 case '2.- Borrar Producto':
-//                     return respuestaBDD;
-//                 case '3.- Buscar Producto':
-//                     return respuestaBDD;
-//             }
-//         }
-//     )
-// }
 function preguntarNombre(respuestaBDD) {
     return rxjs
         .from(inquirer.prompt(preguntaBuscarFoto))
@@ -264,41 +199,6 @@ function preguntarNombre(respuestaBDD) {
         }
     }));
 }
-// function preguntarNombre(respuestaBDD: RespuestaBDD) {
-//     return rxjs
-//         .from(inquirer.prompt(preguntaBuscarProducto))
-//         .pipe(
-//             mergeMap( // RESP ANT OBS
-//                 (respuesta: BuscarProductoPorNombre) => {
-//                     const indiciProducto=respuestaBDD.bdd.productos
-//                         .findIndex( // -1
-//                             (producto) => {
-//                                 return producto.nombre === respuesta.nombre
-//                             }
-//                         );
-//                     if (indiciProducto === -1) {
-//                         console.log('*************************');
-//                         return preguntarNombre(respuestaBDD);
-//                     } else {
-//                         console.log(indiciProducto);
-//                         respuestaBDD.indiceUsuario = indiciProducto;
-//                         return rxjs.from(inquirer.prompt(preguntaEdicionProducto)).pipe(
-//                             map(
-//                                 (respuesta: Productos)=>{
-//                                     respuestaBDD.producto ={
-//                                         nombre:respuesta.nombre,
-//                                         categoria:respuesta.categoria,
-//                                         precio: respuesta.precio
-//                                     };
-//                                     return respuestaBDD;
-//                                 }
-//                             )
-//                         );
-//                     }
-//                 }
-//             )
-//         );
-// }
 function borrarFoto(respuestaBDD) {
     return rxjs
         .from(inquirer.prompt(preguntaBuscarFoto))
@@ -322,34 +222,6 @@ function borrarFoto(respuestaBDD) {
             }));
         }
     }));
-    // function borrarProducto(respuestaBDD: RespuestaBDD) {
-    //     return rxjs
-    //         .from(inquirer.prompt(preguntaBuscarProducto))
-    //         .pipe(
-    //             mergeMap( // RESP ANT OBS
-    //                 (respuesta: BuscarProductoPorNombre) => {
-    //                     const indiceProducto = respuestaBDD.bdd
-    //                         .productos
-    //                         .findIndex( // -1
-    //                             (producto: any) => {
-    //                                 return producto.nombre === respuesta.nombre
-    //                             }
-    //                         );
-    //                     if (indiceProducto === -1) {
-    //                         console.log('Borrar****************');
-    //                         return preguntarNombre(respuestaBDD);
-    //                     } else {
-    //                         console.log(indiceProducto);
-    //                         return rxjs.from(promesaEliminar(respuestaBDD.bdd.productos,indiceProducto)).pipe(
-    //                             map(() =>{
-    //                                     return respuestaBDD
-    //                                 }
-    //                             )
-    //                         )
-    //                     }
-    //                 }
-    //             )
-    //         );
 }
 function buscarFoto(respuestaBDD) {
     return rxjs
@@ -371,34 +243,6 @@ function buscarFoto(respuestaBDD) {
         }
     }));
 }
-// function buscarProducto(respuestaBDD: RespuestaBDD) {
-//     return rxjs
-//         .from(inquirer.prompt(preguntaBuscarProducto))
-//         .pipe(
-//             mergeMap(
-//                 (respuesta: BuscarProductoPorNombre) => {
-//                     const indiceProducto = respuestaBDD.bdd.productos
-//                         .findIndex( // -1
-//                             (producto) => {
-//                                 return producto.nombre === respuesta.nombre
-//                             }
-//                         );
-//                     if (indiceProducto === -1) {
-//                         console.log('Buscar***********');
-//                         return preguntarNombre(respuestaBDD);
-//                     } else {
-//                         return rxjs.from(promesaBuscar(respuestaBDD.bdd.productos[indiceProducto])
-//                         ).pipe(
-//                             map(() =>{
-//                                     return respuestaBDD
-//                                 }
-//                             )
-//                         )
-//                     }
-//                 }
-//             )
-//         );
-// }
 const promesaBuscar = (respuestaBDD) => {
     return new Promise((resolve) => {
         const resultado = {
@@ -414,6 +258,3 @@ const promesaEliminar = (respuestaBDD, indiceProducto) => {
     });
 };
 main();
-// interface BuscarProductoPorNombre {
-//     nombre: string;
-// }

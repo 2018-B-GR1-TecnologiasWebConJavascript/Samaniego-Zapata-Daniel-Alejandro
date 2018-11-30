@@ -10,10 +10,10 @@ const preguntaMenu = {
     name: 'opcionMenu',
     message: 'Escoja una opción: ',
     choices: [
-        'Ingresa Foto', //'1.- Crear Producto',
-        'Borrar Foto', //'2.- Borrar Producto',
-        'Buscar Foto', //'3.- Buscar Producto',
-        'Actualizar Foto', //'4.- Actualizar Producto',
+        'Ingresar Foto',
+        'Borrar Foto',
+        'Buscar Foto',
+        'Actualizar Foto',
     ]
 };
 const ingresarFotos = [{
@@ -30,20 +30,6 @@ const ingresarFotos = [{
     message: 'Ingrese la fecha de la captura (dd/mm/yyyy): '
 }];
 
-// const ingresarProductos = [{
-//     name: 'nombre',
-//     type: 'input',
-//     message: 'Ingrese el nombre del producto: '
-// },{
-//     name: 'categoria',
-//     type: 'input',
-//     message: 'Ingrese la categoria del producto: '
-// },{
-//     name: 'precio',
-//     type: 'input',
-//     message: 'Ingrese el precio del producto: '
-// }];
-
 
 const preguntaBuscarFoto = [
     {
@@ -53,13 +39,6 @@ const preguntaBuscarFoto = [
     }
 ];
 
-// const preguntaBuscarProducto = [
-//     {
-//         type: 'input',
-//         name: 'nombre',
-//         message: 'Ingrese el nombre del producto',
-//     }
-// ];
 
 const preguntaEdicionFoto = [{
     name: 'nombre',
@@ -75,19 +54,6 @@ const preguntaEdicionFoto = [{
     message: 'Ingrese la nueva fecha de captura de la foto: '
 }];
 
-// const preguntaEdicionProducto = [{
-//     name: 'nombre',
-//     type: 'input',
-//     message: 'Ingrese el nuevo nombre del producto: '
-// }, {
-//     name: 'categoria',
-//     type: 'input',
-//     message: 'Ingrese la nueva categoria del producto: '
-// }, {
-//     name: 'precio',
-//     type: 'input',
-//     message: 'Ingrese el nuevo precio del producto: '
-// }];
 function inicialiarBDD() {
 
     // @ts-ignore
@@ -101,7 +67,7 @@ function inicialiarBDD() {
 
                         fs.writeFile(
                             'bdd.json',
-                            '{"fotos":[]}',//'{"productos":[]}',
+                            '{"fotos":[]}',//
                             (error) => {
                                 if (error) {
                                     reject({
@@ -111,7 +77,7 @@ function inicialiarBDD() {
                                 } else {
                                     resolve({
                                         mensaje: 'BDD leida',
-                                        bdd: JSON.parse('{"fotos":[]}')   // bdd: JSON.parse('{"productos":[]}')
+                                        bdd: JSON.parse('{"fotos":[]}')
                                     })
                                 }
 
@@ -142,8 +108,8 @@ function main() {
         .subscribe(
             (data:RespuestaBDD) => {
                 //
-                console.log("\n*************Base Final*****************\n");
-                console.log(data.bdd.fotos)   //console.log(data.bdd.productos)
+                console.log("\n*************Base Final de Fotos*****************\n");
+                console.log(data.bdd.fotos)
             },
             (error) => {
                 //
@@ -202,14 +168,14 @@ function opcionesRespuesta() {
     return mergeMap(
         (respuestaBDD: RespuestaBDD) => {
             const opcion = respuestaBDD.opcionMenu.opcionMenu;
+
             switch (opcion) {
-                case 'Ingresar Foto':   //case '1.- Crear Producto':
-                    return rxjs
-                        .from(inquirer.prompt(ingresarFotos))   //.from(inquirer.prompt(ingresarProductos))
+                case 'Ingresar Foto':
+                    return rxjs.from(inquirer.prompt(ingresarFotos))
                         .pipe(
                             map(
-                                (foto: Fotos) => { // resp ant OBS    //(producto: Productos) => { // resp ant OBS
-                                    respuestaBDD.foto = foto;  //respuestaBDD.producto = producto;
+                                (foto: Fotos) => { // resp ant OBS
+                                    respuestaBDD.foto = foto;
                                     return respuestaBDD;
                                 }
                             )
@@ -222,15 +188,6 @@ function opcionesRespuesta() {
                     break;
                 case 'Actualizar Foto':
                     return preguntarNombre(respuestaBDD);
-
-                // case '3.- Buscar Producto':
-                //     return buscarProducto(respuestaBDD);
-                //     break;
-                // case '4.- Actualizar Producto':
-                //     return preguntarNombre(respuestaBDD);
-                // case '2.- Borrar Producto':
-                //     return borrarProducto(respuestaBDD);
-                //     break;
             }
         }
     )
@@ -267,30 +224,6 @@ function ejecutarAcccion() {
         }
     )
 }
-
-// function ejecutarAcccion() {
-//     return map( // Respuesta del anterior OBS
-//         (respuestaBDD: RespuestaBDD) => {
-//             const opcion = respuestaBDD.opcionMenu.opcionMenu;
-//             switch (opcion) {
-//                 case '1.- Crear Producto':
-//                     const producto = respuestaBDD.producto;
-//                     respuestaBDD.bdd.productos.push(producto);
-//                     return respuestaBDD;
-//                 case '4.- Actualizar Producto':
-//                     const indice = respuestaBDD.indiceUsuario;
-//                     respuestaBDD.bdd.productos[indice].nombre = respuestaBDD.producto.nombre;
-//                     respuestaBDD.bdd.productos[indice].categoria = respuestaBDD.producto.categoria;
-//                     respuestaBDD.bdd.productos[indice].precio= respuestaBDD.producto.precio;
-//                     return respuestaBDD;
-//                 case '2.- Borrar Producto':
-//                     return respuestaBDD;
-//                 case '3.- Buscar Producto':
-//                     return respuestaBDD;
-//             }
-//         }
-//     )
-// }
 
 function preguntarNombre(respuestaBDD: RespuestaBDD) {
     return rxjs
@@ -329,43 +262,6 @@ function preguntarNombre(respuestaBDD: RespuestaBDD) {
         );
 }
 
-
-// function preguntarNombre(respuestaBDD: RespuestaBDD) {
-//     return rxjs
-//         .from(inquirer.prompt(preguntaBuscarProducto))
-//         .pipe(
-//             mergeMap( // RESP ANT OBS
-//                 (respuesta: BuscarProductoPorNombre) => {
-//                     const indiciProducto=respuestaBDD.bdd.productos
-//                         .findIndex( // -1
-//                             (producto) => {
-//                                 return producto.nombre === respuesta.nombre
-//                             }
-//                         );
-//                     if (indiciProducto === -1) {
-//                         console.log('*************************');
-//                         return preguntarNombre(respuestaBDD);
-//                     } else {
-//                         console.log(indiciProducto);
-//                         respuestaBDD.indiceUsuario = indiciProducto;
-//                         return rxjs.from(inquirer.prompt(preguntaEdicionProducto)).pipe(
-//                             map(
-//                                 (respuesta: Productos)=>{
-//                                     respuestaBDD.producto ={
-//                                         nombre:respuesta.nombre,
-//                                         categoria:respuesta.categoria,
-//                                         precio: respuesta.precio
-//                                     };
-//                                     return respuestaBDD;
-//                                 }
-//                             )
-//                         );
-//                     }
-//                 }
-//             )
-//         );
-// }
-
 function borrarFoto(respuestaBDD: RespuestaBDD) {
     return rxjs
         .from(inquirer.prompt(preguntaBuscarFoto))
@@ -395,35 +291,6 @@ function borrarFoto(respuestaBDD: RespuestaBDD) {
                 }
             )
         );
-
-// function borrarProducto(respuestaBDD: RespuestaBDD) {
-//     return rxjs
-//         .from(inquirer.prompt(preguntaBuscarProducto))
-//         .pipe(
-//             mergeMap( // RESP ANT OBS
-//                 (respuesta: BuscarProductoPorNombre) => {
-//                     const indiceProducto = respuestaBDD.bdd
-//                         .productos
-//                         .findIndex( // -1
-//                             (producto: any) => {
-//                                 return producto.nombre === respuesta.nombre
-//                             }
-//                         );
-//                     if (indiceProducto === -1) {
-//                         console.log('Borrar****************');
-//                         return preguntarNombre(respuestaBDD);
-//                     } else {
-//                         console.log(indiceProducto);
-//                         return rxjs.from(promesaEliminar(respuestaBDD.bdd.productos,indiceProducto)).pipe(
-//                             map(() =>{
-//                                     return respuestaBDD
-//                                 }
-//                             )
-//                         )
-//                     }
-//                 }
-//             )
-//         );
 }
 
 function buscarFoto(respuestaBDD: RespuestaBDD) {
@@ -455,34 +322,6 @@ function buscarFoto(respuestaBDD: RespuestaBDD) {
         );
 }
 
-// function buscarProducto(respuestaBDD: RespuestaBDD) {
-//     return rxjs
-//         .from(inquirer.prompt(preguntaBuscarProducto))
-//         .pipe(
-//             mergeMap(
-//                 (respuesta: BuscarProductoPorNombre) => {
-//                     const indiceProducto = respuestaBDD.bdd.productos
-//                         .findIndex( // -1
-//                             (producto) => {
-//                                 return producto.nombre === respuesta.nombre
-//                             }
-//                         );
-//                     if (indiceProducto === -1) {
-//                         console.log('Buscar***********');
-//                         return preguntarNombre(respuestaBDD);
-//                     } else {
-//                         return rxjs.from(promesaBuscar(respuestaBDD.bdd.productos[indiceProducto])
-//                         ).pipe(
-//                             map(() =>{
-//                                     return respuestaBDD
-//                                 }
-//                             )
-//                         )
-//                     }
-//                 }
-//             )
-//         );
-// }
 const promesaBuscar = (respuestaBDD) =>{
     return new Promise(
         (resolve) => {
@@ -509,21 +348,9 @@ interface RespuestaBDD {
     foto?: Fotos;
 }
 
-// interface RespuestaBDD {
-//     mensaje: string;
-//     bdd: BDD;
-//     opcionMenu?: OpcionMenu;
-//     indiceUsuario?: number;
-//     producto?: Productos;
-// }
-
 export interface BDD {
     fotos: Fotos[] | any ;
 }
-
-// interface BDD {
-//     productos: Productos[] | any ;
-// }
 
 interface Fotos {
     nombre: string;
@@ -531,24 +358,12 @@ interface Fotos {
     fecha: string;
 }
 
-// interface Productos {
-//     nombre: string;
-//     categoria: string;
-//     precio: number;
-// }
-
 interface OpcionMenu {
     opcionMenu: 'Ingresar Foto' | 'Borrar Foto' | 'Buscar Foto' | 'Actualizar Foto';
 }
-
-// interface OpcionMenu {
-//     opcionMenu: '1.- Crear Producto' | '2.- Borrar Producto' | '3.- Buscar Producto' | '4.- Actualizar Producto';
-// }
 
 interface BuscarFotoPorNombre {
     nombre: string;
 }
 
-// interface BuscarProductoPorNombre {
-//     nombre: string;
-// }
+
