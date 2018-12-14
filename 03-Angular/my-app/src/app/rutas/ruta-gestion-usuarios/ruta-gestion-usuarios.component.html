@@ -1,0 +1,30 @@
+<h3>Gestion de Usuarios </h3>
+<p>Gestione sus usuarios</p>
+
+<table>
+  <!-- tr -> table row -->
+  <tr>
+    <!-- th -> table header -->
+    <th>Identificador</th>
+    <th>Nombre</th>
+    <th>Accion</th>
+  </tr>
+  <tr *ngFor="let usuario of usuarios">
+    <!-- tf -> table detail -->
+    <!-- INTERPOLACION-->
+    <td>{{usuario.id}}</td>
+    <td>{{usuario.nombre}}</td>
+    <td>
+      <!-- Event Binding (nombreEvento)="funcionEnLaClase()" -->
+      <button (click)="imprimir(usuario)">Eliminar {{hola()}}</button>
+    </td>
+  </tr>
+</table>
+
+<router-outlet></router-outlet>
+
+
+
+
+<!-- DIRECTIVAS-->
+<!-- *ngFor -> ITERA UN ARREGLO -->
