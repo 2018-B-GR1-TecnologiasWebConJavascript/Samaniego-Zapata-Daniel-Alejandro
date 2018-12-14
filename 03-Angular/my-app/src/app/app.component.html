@@ -1,18 +1,41 @@
 <!-- header 1-6 titulos -->
 <h1>Componente Principal</h1>
-<!-- ul -->
+<!-- ul -> unordered list -->
+<!-- ol -> ordered list -->
 <ul>
+  <!-- li -> list item -->
   <li>
+    <!-- a -> anchor -> ancla -->
     <a routerLink="/inicio">Inicio</a>
   </li>
   <li>
     <a routerLink="/menu">Menu</a>
     <ol>
       <li>
+
         <a routerLink="menu/gestion-usuarios">Gestion Usuarios</a>
+        <ul>
+          <li>
+            <a routerLink="/menu/gestion-usuarios/crear-usuarios">Crear Usuarios</a>
+          </li>
+          <li>
+            <a routerLink="/menu/gestion-usuarios/actualizar-usuarios">Actualizar Usuarios</a>
+          </li>
+        </ul>
+
       </li>
       <li>
+
         <a routerLink="menu/gestion-productos">Gestion Productos</a>
+        <ul>
+          <li>
+            <a routerLink="/menu/gestion-producto/crear-producto">Crear Producto</a>
+          </li>
+          <li>
+            <a routerLink="/menu/gestion-producto/actualizar-producto">Actualizar Producto</a>
+          </li>
+        </ul>
+
       </li>
     </ol>
   </li>
@@ -25,5 +48,5 @@
 </ul>
 
 <router-outlet></router-outlet>
-<!-- p  párrafo -->
+<!-- p -> párrafo -->
 <p>Footer</p>

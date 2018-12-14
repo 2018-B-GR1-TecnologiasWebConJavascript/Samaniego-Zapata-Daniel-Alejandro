@@ -10,6 +10,10 @@ import { RutaPerfilComponent } from './rutas/ruta-perfil/ruta-perfil.component';
 import { Ruta404Component } from './rutas/ruta404/ruta404.component';
 import { RutaGestionUsuariosComponent } from './rutas/ruta-gestion-usuarios/ruta-gestion-usuarios.component';
 import { RutaGestionProductosComponent } from './rutas/ruta-gestion-productos/ruta-gestion-productos.component';
+import { RutaCrearUsuariosComponent } from './rutas/ruta-crear-usuarios/ruta-crear-usuarios.component';
+import { RutaActualizarUsuariosComponent } from './rutas/ruta-actualizar-usuarios/ruta-actualizar-usuarios.component';
+import { RutaCrearProductoComponent } from './rutas/ruta-crear-producto/ruta-crear-producto.component';
+import { RutaActualizarProductoComponent } from './rutas/ruta-actualizar-producto/ruta-actualizar-producto.component';
 
 @NgModule({
   declarations: [   // Components
@@ -20,7 +24,11 @@ import { RutaGestionProductosComponent } from './rutas/ruta-gestion-productos/ru
     RutaPerfilComponent,
     Ruta404Component,
     RutaGestionUsuariosComponent,
-    RutaGestionProductosComponent
+    RutaGestionProductosComponent,
+    RutaCrearUsuariosComponent,
+    RutaActualizarUsuariosComponent,
+    RutaCrearProductoComponent,
+    RutaActualizarProductoComponent
   ],
   imports: [  //Modulos
     BrowserModule,
@@ -33,18 +41,27 @@ export class AppModule { }
 
 /*
 Componente principal
-<router-outlel></router-outlet>
+<router-outlel></router-outlet>     Para meter componentes dentro de otros componentes
+
 Inicio
 Login
 Perfil
-Menu
 404 - Not found
+Menu
+
   <router-outlel></router-outlet>
     -Gestion Usuarios
-        -Crear Usuarios
-        -Actualizar Usuarios
-    -Gestion Pproductos
-        -Crear Producto
-        -Actualizar Producto
+    /menu/gestion-usuarios
+
+    <router-outlel></router-outlet>
+        -Crear Usuarios         /menu/gestion-usuarios/crear-usuarios
+        -Actualizar Usuarios    /menu/gestion-usuarios/actualizar-usuarios
+
+    <router-outlel></router-outlet>
+    -Gestion Productos
+    /menu/gestion-producto
+
+        -Crear Producto       /menu/gestion-producto/crear-producto
+        -Actualizar Producto  /menu/gestion-producto/actualizar-producto
 
 */
