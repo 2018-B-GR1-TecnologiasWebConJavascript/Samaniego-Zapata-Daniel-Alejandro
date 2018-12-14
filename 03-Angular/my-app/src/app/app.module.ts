@@ -28,7 +28,7 @@ import { RutaActualizarProductoComponent } from './rutas/ruta-actualizar-product
     RutaCrearUsuariosComponent,
     RutaActualizarUsuariosComponent,
     RutaCrearProductoComponent,
-    RutaActualizarProductoComponent
+    RutaActualizarProductoComponent,
   ],
   imports: [  //Modulos
     BrowserModule,
@@ -59,9 +59,9 @@ Menu
 
     <router-outlel></router-outlet>
     -Gestion Productos
-    /menu/gestion-producto
+    /menu/gestion-productos
 
-        -Crear Producto       /menu/gestion-producto/crear-producto
-        -Actualizar Producto  /menu/gestion-producto/actualizar-producto
+        -Crear Producto       /menu/gestion-productos/crear-producto
+        -Actualizar Producto  /menu/gestion-productos/actualizar-producto
 
 */
