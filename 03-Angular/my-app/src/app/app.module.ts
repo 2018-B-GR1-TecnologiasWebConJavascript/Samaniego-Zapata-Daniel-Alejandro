@@ -15,6 +15,7 @@ import { RutaActualizarUsuariosComponent } from './rutas/ruta-actualizar-usuario
 import { RutaCrearProductoComponent } from './rutas/ruta-crear-producto/ruta-crear-producto.component';
 import { RutaActualizarProductoComponent } from './rutas/ruta-actualizar-producto/ruta-actualizar-producto.component';
 import {UsuarioServiceService} from "./servicios/usuario-service.service";
+import { RutaVerDetalleUsuarioComponent } from './rutas/ruta-ver-detalle-usuario/ruta-ver-detalle-usuario.component';
 
 @NgModule({
   declarations: [   // Components
@@ -30,9 +31,10 @@ import {UsuarioServiceService} from "./servicios/usuario-service.service";
     RutaActualizarUsuariosComponent,
     RutaCrearProductoComponent,
     RutaActualizarProductoComponent,
+    RutaVerDetalleUsuarioComponent,
   ],
   imports: [  //Modulos
-    BrowserModule,
+    BrowserModule,        // Sirve para dejarnos utilizar el Directivas, Event binding, interpolacion, property binding.
     AppRoutingModule
   ],
   providers: [

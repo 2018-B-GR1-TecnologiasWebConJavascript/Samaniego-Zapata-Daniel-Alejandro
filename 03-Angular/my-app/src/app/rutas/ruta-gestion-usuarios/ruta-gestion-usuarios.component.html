@@ -16,7 +16,22 @@
     <td>{{usuario.nombre}}</td>
     <td>
       <!-- Event Binding (nombreEvento)="funcionEnLaClase()" -->
-      <button (click)="imprimir(usuario)">Eliminar {{hola()}}</button>
+      <button (click)="eliminar(usuario)">
+        Eliminar
+      </button>
+      <!-- Property Binding [propiedad]  aacedemos a una propiedad de la etiqueta   JS-->
+      <a [routerLink]="['/menu','ver-usuario',usuario.id]">
+        <!--
+        /menu/ver-usuario-usuario.id
+        url -> arreglo
+        ['/menu','ver-usuario',usuario.id]
+        -->
+
+        <button>
+          Ver
+        </button>
+      </a>
+
     </td>
   </tr>
 </table>
