@@ -7,17 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaGestionUsuariosComponent implements OnInit {
 
-  usuarios: Usuario[] = [
-    {
-      id: 1,
-      nombre: 'daniel'
-    },
-    {
-      id: 2,
-      nombre: 'loco'
-    },
-  ];
-
+  //  Inyeccion de dependencias
   constructor() { }
 
   ngOnInit() {
@@ -37,7 +27,4 @@ export class RutaGestionUsuariosComponent implements OnInit {
   }
 }
 
-interface Usuario{
-  nombre?: string;
-  id?: number;
-}
+
