@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UsuarioServiceService} from "../../servicios/usuario-service.service";
 
 @Component({
   selector: 'app-ruta-gestion-usuarios',
@@ -7,22 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaGestionUsuariosComponent implements OnInit {
 
+  usuarios = [];
+
   //  Inyeccion de dependencias
-  constructor() { }
+  constructor(
+    private readonly _usuarioService: UsuarioServiceService
+  ) {
+
+  }
 
   ngOnInit() {
+    //Cuando esta listo el web component para mostrarse.
+    this.usuarios = this._usuarioService.usuarios;
   }
 
-  hola() {
-    return 'Hola';
-  }
-  imprimir(usuario: Usuario){
-    console.log('Imprimir', usuario);
-    const indiceUsuarioEliminar = this.usuarios
-      .findIndex((usuarioABuscar)=>{
-        return usuarioABuscar.id == usuario.id
-      });
-    this.usuarios.splice(indiceUsuarioEliminar, 1);
+  eliminar(usuario){
+
+    this._usuarioService.eliminar(usuario.id);
 
   }
 }

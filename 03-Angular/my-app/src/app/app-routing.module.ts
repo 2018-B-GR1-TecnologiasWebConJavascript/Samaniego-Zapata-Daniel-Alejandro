@@ -11,6 +11,7 @@ import {RutaCrearUsuariosComponent} from "./rutas/ruta-crear-usuarios/ruta-crear
 import {RutaActualizarUsuariosComponent} from "./rutas/ruta-actualizar-usuarios/ruta-actualizar-usuarios.component";
 import {RutaCrearProductoComponent} from "./rutas/ruta-crear-producto/ruta-crear-producto.component";
 import {RutaActualizarProductoComponent} from "./rutas/ruta-actualizar-producto/ruta-actualizar-producto.component";
+import {RutaVerDetalleUsuarioComponent} from "./rutas/ruta-ver-detalle-usuario/ruta-ver-detalle-usuario.component";
 
 const routes: Routes = [
   {
@@ -28,11 +29,11 @@ const routes: Routes = [
     path: 'menu',
     component: RutaMenuComponent,
     children: [
-      // {      // Para que se vaya directo a gestion productos
-      //   path: '',
-      //   pathMatch: 'full',
-      //   redirectTo: 'gestion-productos'
-      // },
+      {      // Para que se vaya directo a gestion productos
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'gestion-productos'
+      },
       {
         //   menu/gestion-usuarios
         path: 'gestion-usuarios',
@@ -62,6 +63,11 @@ const routes: Routes = [
             component: RutaActualizarProductoComponent
           }
         ]
+      },
+      {
+        // /menu/ver-usuario
+        path: 'ver-usuario/:idUsuario',
+        component: RutaVerDetalleUsuarioComponent
       }
     ]
   },
@@ -84,7 +90,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)],  //Nos permite movernos entre rutas, sacar parametros
   exports: [RouterModule]
 })
 export class AppRoutingModule {
