@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UsuarioServiceService} from "../../servicios/usuario-service.service";
 import {ActivatedRoute} from "@angular/router";
+import {UsuarioInterface} from '../../servicios/usuario-service.service'
 
 @Component({
   selector: 'app-ruta-ver-detalle-usuario',
@@ -8,6 +9,9 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./ruta-ver-detalle-usuario.component.scss']
 })
 export class RutaVerDetalleUsuarioComponent implements OnInit {
+
+  usuario: UsuarioInterface;
+
 
   constructor(
     private readonly _usuarioService: UsuarioServiceService,
@@ -20,13 +24,13 @@ export class RutaVerDetalleUsuarioComponent implements OnInit {
     //INICIO
     rutaActiva$.subscribe(    // ASYNC
         (parametros)=>{
-          console.log(parametros);
-          //  -> {idUsuario:"1"}   Todos los parametros del URL son del tipo STRING
+          // parametros -> {idUsuario:"1"}   Todos los parametros del URL son del tipo STRING
           const usuarioEncontrado = this._usuarioService
             .buscarPorId(+parametros.idUsuario)
           // para convertir a un numero en javascript se pone
           // Number(parametros.idUsuario) ->   +parametros.idUsuario
-          console.log(usuarioEncontrado);
+          this.usuario = usuarioEncontrado;
+
         }
       );
     //FIN
