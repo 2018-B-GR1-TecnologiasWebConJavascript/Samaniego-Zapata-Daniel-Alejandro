@@ -33,9 +33,19 @@ module.exports = {
     },
     sueldo:{
       type:'number',
+      defaulsTo: 394.00    // guardar valores por defecto
     },
-    sueldo:{
+    correoElectronico:{
+      type:'string',
+      columnName: 'correo_electronico',
+      isEmail: true
+    },
+    numeroPropiedades:{
       type:'number',
+      columnName: 'numero_propiedades',
+      max: 5,
+      min: 0,
+      default: 0
     }
   },
 
