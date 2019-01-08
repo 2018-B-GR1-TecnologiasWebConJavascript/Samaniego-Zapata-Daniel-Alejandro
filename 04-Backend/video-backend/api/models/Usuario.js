@@ -16,11 +16,11 @@ module.exports = {
 
     nombre:{
       type:'string',
-      require: true
+      required: true
     },
     aoellido:{
       type:'string',
-      require: true
+      required: true
     },
     direccionCasa:{
       type:'string',
@@ -28,12 +28,12 @@ module.exports = {
     },
     cedula:{
       type:'string',
-      require: true,
+      required: true,
       unique: true
     },
     sueldo:{
       type:'number',
-      defaulsTo: 394.00    // guardar valores por defecto
+      defaultsTo: 394.00    // guardar valores por defecto
     },
     correoElectronico:{
       type:'string',
@@ -45,10 +45,23 @@ module.exports = {
       columnName: 'numero_propiedades',
       max: 5,
       min: 0,
-      default: 0
-    }
+      defaultsTo: 0
+    },
+    estado:{
+      type:'boolean',
+      defaultsTo: true
+    },
+    rol:{
+      type:'string',
+      //Quiero que me acete que el rol sea Administrador o Usuario o Reportes
+      isIn: [
+        'Administrador',
+        'Usuario',
+        'Reporte'
+      ],
+      defaultsTo: 'Usuario'
   },
-
+  }
 };
 
 // RESTFULL -> HTTP -> ESTANDAR (PUEDEN)
@@ -72,7 +85,8 @@ module.exports = {
 // -> Crear
 // http://192.168.0.12:1337/Raza
 // METHOD: POST
-// !PARAMETROS! (body / form)
+// !PARAMETROS! (body / form -- formulario)
+//
 //
 // -> Find One By ID
 // http://192.168.0.12:1337/Usuario/25

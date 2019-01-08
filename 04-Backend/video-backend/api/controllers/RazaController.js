@@ -17,12 +17,16 @@ module.exports = {
   },
   buscarPorNombre: async function (req, res) {
     // TENER ACCESO A TODOS LOS MODELOS
-    // Body Query
+    // Body Query ... Guarda los parametros de
     const parametros = req.allParams();
 
     var nombreCac = await Raza.find({
-      nombre: {'startsWith': parametros.nombre}
+      nombre: {'startsWith': parametros.nombre}  // Los que empiezan con
     });
+
+    // var nombreCac = await Raza.find({
+    //   nombre: {'startsWith': 'Cac'}  // Los que empiezan con
+    // });
 
     return res.ok(nombreCac);
 
