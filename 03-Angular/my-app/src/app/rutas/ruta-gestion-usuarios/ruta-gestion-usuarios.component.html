@@ -1,6 +1,12 @@
 <h3>Gestion de Usuarios </h3>
 <p>Gestione sus usuarios</p>
 
+<a routerLink = "/menu/crear-raza">
+  <button>Crear raza</button>
+</a>
+
+
+
 <table>
   <!-- tr -> table row -->
   <tr>
@@ -10,6 +16,7 @@
     <th>Accion</th>
   </tr>
   <tr *ngFor="let usuario of usuarios">
+    <!-- Arreglo de usuarios me muestra -->
     <!-- tf -> table detail -->
     <!-- INTERPOLACION-->
     <td>{{usuario.id}}</td>
