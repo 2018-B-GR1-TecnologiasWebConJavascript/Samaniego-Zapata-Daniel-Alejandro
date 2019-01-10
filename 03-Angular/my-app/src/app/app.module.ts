@@ -18,6 +18,7 @@ import {UsuarioServiceService} from "./servicios/usuario-service.service";
 import { RutaVerDetalleUsuarioComponent } from './rutas/ruta-ver-detalle-usuario/ruta-ver-detalle-usuario.component';
 import {HttpClientModule} from "@angular/common/http";
 import {RazaRestService} from "./servicios/rest/raza-rest.service";
+import { RutaCrearRazaComponent } from './rutas/ruta-crear-raza/ruta-crear-raza.component';
 
 @NgModule({
   declarations: [   // Components
@@ -34,12 +35,13 @@ import {RazaRestService} from "./servicios/rest/raza-rest.service";
     RutaCrearProductoComponent,
     RutaActualizarProductoComponent,
     RutaVerDetalleUsuarioComponent,
+    RutaCrearRazaComponent,
   ],
   imports: [  //Modulos
     BrowserModule,        // Sirve para dejarnos utilizar el Directivas, Event binding, interpolacion, property binding.
     AppRoutingModule,
     HttpClientModule      // Acceso a un servicio HttpClient
-  ]
+  ],
   providers: [
     UsuarioServiceService,
     RazaRestService

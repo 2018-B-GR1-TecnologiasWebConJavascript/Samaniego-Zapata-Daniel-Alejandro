@@ -4,7 +4,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
+import {Observable, pipe} from "rxjs";
 import {Raza} from "../../interfaces/raza";
 import {map} from "rxjs/operators";
 
@@ -27,12 +27,16 @@ export class RazaRestService {
             return <Raza[]> respuesta;
           }
         )
-      );
+      );  // Castear
 
     return razas$;
-
   }
 
+  delete(id: number): Observable<Raza> {
+    return this._httpClient
+      .delete(environment.url + this.nombreModelo + `/${id}`)
+      .pipe(map(r => <Raza> r)); // Castear
+  }
 
 }
 

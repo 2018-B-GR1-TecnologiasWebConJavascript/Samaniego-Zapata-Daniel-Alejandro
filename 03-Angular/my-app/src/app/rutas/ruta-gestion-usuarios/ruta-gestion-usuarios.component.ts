@@ -27,6 +27,7 @@ export class RutaGestionUsuariosComponent implements OnInit {
       .subscribe(
         (razas: Raza[])=>{
           console.log(razas);
+          this.usuarios = razas;
         },
         (error)=>{
           console.error('Error', error);
@@ -36,9 +37,25 @@ export class RutaGestionUsuariosComponent implements OnInit {
 
   }
 
-  eliminar(usuario){
+  eliminar(raza: Raza){
 
-    this._usuarioService.eliminar(usuario.id);
+    const razaEliminada$ = this._razaRestService.delete(raza.id);
+
+    razaEliminada$
+    .subscribe(
+      (razaEliminada: Raza)=>{
+        console.log('Se elimino:', razaEliminada);
+
+        const indice = this.usuarios
+          .findIndex((r) => r.id === raza.id);
+
+        this.usuarios.splice(indice,1);
+
+      },
+      (error)=>{
+        console.error('Error', error);
+      }
+    );
 
   }
 }
