@@ -7,15 +7,37 @@
   <div>
   <!-- Los Label y los input son ñaños no pueden estar separados-->
   <label for = "nombre">Nombre</label>
-  <input id = "nombre"
+    <!-- Banana Box Model -->
+    <!-- Two way data binding -->
+    <!-- Componente -> HTML -->
+    <!--  -->
+    <input id = "nombre"
+           name="nombre"
+           type = "text"
+           placeholder = "Escribe el nombre de una raza"
+           [(ngModel)]="nombre"
+
+    >
+    </div>
+
+  <div>
+  <label for = "apellido">Apellido</label>
+  <!-- Banana Box Model -->
+  <!-- Two way data binding -->
+  <!-- Componente -> HTML -->
+  <!--  -->
+  <input id = "apellido"
+         name="apellido"
          type = "text"
          placeholder = "Escribe el nombre de una raza"
+         [(ngModel)]="apellido"
+
   >
   </div>
 
-  
-  <button> Crear raza </button>
 
-</form>
+    <button> Crear raza </button>
+
+  </form>
 
 

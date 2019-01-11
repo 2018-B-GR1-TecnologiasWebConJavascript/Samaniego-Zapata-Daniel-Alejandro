@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaCrearRazaComponent implements OnInit {
 
+  nombre: string = 'Daniel';
+
+  apellido: string ='';
+
   constructor() { }
 
   ngOnInit() {
