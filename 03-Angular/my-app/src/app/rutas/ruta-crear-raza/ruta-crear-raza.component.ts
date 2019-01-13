@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {RazaRestService} from "../../servicios/rest/raza-rest.service";
+import {Raza} from "../../interfaces/raza";
 
 @Component({
   selector: 'app-ruta-crear-raza',
@@ -7,9 +9,55 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RutaCrearRazaComponent implements OnInit {
 
-  constructor() { }
+  raza:RazaEjemplo = {
+    nombre:'Daniel',
+    apellido:''
+  };
+
+  constructor(private readonly _razaRestService: RazaRestService) {
+
+  }
 
   ngOnInit() {
   }
 
+  crearRaza(){
+    const crearRazas$ = this._razaRestService
+      .create(this.raza.nombre);
+
+    crearRazas$
+      .subscribe(
+        (raza:Raza)=>{
+          console.log('Raza');
+          alert(`Raza creada: ${raza.nombre}`);
+        },
+        (error)=>{
+          console.error('Error: ', error)
+        }
+      )
+  }
+
+  mostrarEnConsola(objeto){
+    console.log(objeto);
+    console.log(objeto.value);
+    //this.apellido = objeto.value;
+
+  }
+
+// Es mejor utilizar ngModel ya que se actualiza enseguida
+// ngModel se actualiza automaticamente el COMPONENTE
+// En el # toca hacer alguna maniobra para que se actualice.
+
 }
+
+
+
+
+interface RazaEjemplo {
+  nombre:string;
+  apellido:string;
+  
+}
+
+
+

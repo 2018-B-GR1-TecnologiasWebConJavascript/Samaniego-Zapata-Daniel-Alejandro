@@ -2,20 +2,65 @@
 
 <p>Cree razas de animales</p>
 
-<form>
+<form (submit)="crearRaza()">
+
 
   <div>
+
+  {{raza.nombre}}
+
   <!-- Los Label y los input son ñaños no pueden estar separados-->
   <label for = "nombre">Nombre</label>
-  <input id = "nombre"
-         type = "text"
-         placeholder = "Escribe el nombre de una raza"
+
+    <!--Banana Box Model-->
+    <!--Two way data binding-->
+    <!--Componente -> HTML -->
+    <!--HTML -> Componente-->
+    <input id = "nombre"
+           name = "nombre"
+           type = "text"
+           placeholder = "Escribe el nombre de una raza"
+           [(ngModel)] = "raza.nombre"
   >
   </div>
 
+  <div>
+
+    {{raza.apellido}}
+
+    <!-- Los Label y los input son ñaños no pueden estar separados-->
+    <label for = "nombre">Apellido</label>
+
+    <!--Banana Box Model-->
+    <!--Two way data binding-->
+    <!--Componente -> HTML -->
+    <!--HTML -> Componente-->
+    <input id = "apellido"
+           name = "apellido"
+           type = "text"
+           placeholder = "Escribe el apellido de una raza"
+           [(ngModel)] = "raza.apellido"
+    >
+  </div>
+
+  <button type="button"> Button </button>  <!-- Cuando no quiero que se ejecute la funcion crearRaza pero si cualquier otra funcion -->
   
-  <button> Crear raza </button>
+  <button type="reset"> Reset </button>     <!-- Se borran los datos que llene -->
+
+  <button type="submit"> Submit </button>   <!-- Para crear las razas -->
 
 </form>
 
+<!--
+<p>valor apellido = {{apellido}}</p>
 
+<input id="apellido"
+       type = "text"
+       name="apellido"
+       #apellidoEtiqueta
+
+>
+
+<button (click) = "mostrarEnConsola(apellidoEtiqueta)">Mostrar valor apellido</button>
+
+-->
