@@ -2,8 +2,16 @@
 
 <p>Cree razas de animales</p>
 
-<form (submit)="crearRaza()">
+<!-- novalidate -> Navegador no validez por fa-->
+<form #razaFormulario = "ngForm"
+      novalidate
+      (submit)="crearRaza(razaFormulario)">
 
+  <pre>
+    formulario valido: {{razaFormulario.valid}}
+    formulario errores: {{razaFormulario.errors}}
+    formulario touched: {{razaFormulario.touched}}
+  </pre>
 
   <div>
 

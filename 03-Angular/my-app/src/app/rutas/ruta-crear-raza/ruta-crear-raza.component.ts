@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RazaRestService} from "../../servicios/rest/raza-rest.service";
 import {Raza} from "../../interfaces/raza";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-ruta-crear-raza',
@@ -21,7 +22,10 @@ export class RutaCrearRazaComponent implements OnInit {
   ngOnInit() {
   }
 
-  crearRaza(){
+  crearRaza(formulario: NgForm){
+
+    console.log('Formulario: ', formulario);
+
     const crearRazas$ = this._razaRestService
       .create(this.raza.nombre);
 
