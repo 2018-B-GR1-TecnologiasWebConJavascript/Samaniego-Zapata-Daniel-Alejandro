@@ -22,24 +22,36 @@ export class RutaCrearRazaComponent implements OnInit {
   ngOnInit() {
   }
 
-  crearRaza(formulario: NgForm){
+  crearRaza(formulario: NgForm) {
 
     console.log('Formulario: ', formulario);
 
-    const crearRazas$ = this._razaRestService
-      .create(this.raza.nombre);
+    // Validar
 
-    crearRazas$
-      .subscribe(
-        (raza:Raza)=>{
-          console.log('Raza');
-          alert(`Raza creada: ${raza.nombre}`);
-        },
-        (error)=>{
-          console.error('Error: ', error)
-        }
-      )
+    if (this.nombreContieneA(this.raza.nombre.toString())) {
+      const crearRazas$ = this._razaRestService
+        .create(this.raza.nombre);
+
+      crearRazas$
+        .subscribe(
+          (raza: Raza) => {
+            console.log('Raza');
+            alert(`Raza creada: ${raza.nombre}`);
+          },
+          (error) => {
+            console.error('Error: ', error);
+          }
+        );
+    } else {
+      alert('ERROR, No contiene una letra A');
+    }
   }
+
+
+  nombreContieneA(nombre: string): boolean{
+    return nombre.toLowerCase().includes('a');
+  }
+
 
   mostrarEnConsola(objeto){
     console.log(objeto);
@@ -53,8 +65,6 @@ export class RutaCrearRazaComponent implements OnInit {
 // En el # toca hacer alguna maniobra para que se actualice.
 
 }
-
-
 
 
 interface RazaEjemplo {

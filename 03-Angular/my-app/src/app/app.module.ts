@@ -20,6 +20,8 @@ import {HttpClientModule} from "@angular/common/http";
 import {RazaRestService} from "./servicios/rest/raza-rest.service";
 import { RutaCrearRazaComponent } from './rutas/ruta-crear-raza/ruta-crear-raza.component';
 import {FormsModule} from "@angular/forms";
+import { RutaActualizarRazaComponent } from './rutas/ruta-actualizar-raza/ruta-actualizar-raza.component';
+import { ImagenPeliculaComponent } from './componentes/imagen-pelicula/imagen-pelicula.component';
 
 @NgModule({
   declarations: [   // Components
@@ -37,6 +39,8 @@ import {FormsModule} from "@angular/forms";
     RutaActualizarProductoComponent,
     RutaVerDetalleUsuarioComponent,
     RutaCrearRazaComponent,
+    RutaActualizarRazaComponent,
+    ImagenPeliculaComponent,
   ],
   imports: [  //Modulos
     BrowserModule,        // Sirve para dejarnos utilizar el Directivas, Event binding, interpolacion, property binding.

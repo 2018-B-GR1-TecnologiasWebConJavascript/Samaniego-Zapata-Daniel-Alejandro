@@ -13,6 +13,7 @@ import {RutaCrearProductoComponent} from "./rutas/ruta-crear-producto/ruta-crear
 import {RutaActualizarProductoComponent} from "./rutas/ruta-actualizar-producto/ruta-actualizar-producto.component";
 import {RutaVerDetalleUsuarioComponent} from "./rutas/ruta-ver-detalle-usuario/ruta-ver-detalle-usuario.component";
 import {RutaCrearRazaComponent} from "./rutas/ruta-crear-raza/ruta-crear-raza.component";
+import {RutaActualizarRazaComponent} from "./rutas/ruta-actualizar-raza/ruta-actualizar-raza.component";
 
 const routes: Routes = [
   {
@@ -58,6 +59,12 @@ const routes: Routes = [
       },
 
       {
+        //   menu/actualizar-raza
+        path: 'actualizar-raza/:idRaza',
+        component: RutaActualizarRazaComponent,
+      },
+
+      {
         //   menu/gestion-productos
         path: 'gestion-productos',
         component: RutaGestionProductosComponent,
@@ -72,6 +79,7 @@ const routes: Routes = [
           }
         ]
       },
+
       {
         // /menu/ver-usuario
         path: 'ver-usuario/:idUsuario',
