@@ -11,7 +11,7 @@ import {NgForm} from "@angular/forms";
 export class RutaCrearRazaComponent implements OnInit {
 
   raza:RazaEjemplo = {
-    nombre:'Daniel',
+    nombre:'',
     apellido:''
   };
 

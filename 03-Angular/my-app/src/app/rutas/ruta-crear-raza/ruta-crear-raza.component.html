@@ -9,13 +9,57 @@
 
   <pre>
     formulario valido: {{razaFormulario.valid}}
+    formulario invalido: {{razaFormulario.invalid}}
+
     formulario errores: {{razaFormulario.errors}}
+
+    <!-- tocado ... No tocado -->
     formulario touched: {{razaFormulario.touched}}
+    formulario untouched: {{razaFormulario.untouched}}
+
+    <!-- Formulario sucio o no -->
+    formulario dirty: {{razaFormulario.dirty}}
+    formulario pristine: {{razaFormulario.pristine}}
+
   </pre>
 
   <div>
 
   {{raza.nombre}}
+
+    <pre>
+
+    nombre valido: {{nombreControl.valid}}
+    nombre invalido: {{nombreControl.invalid}}
+
+    nombre errores: {{nombreControl.errors | json}}
+
+      <!-- tocado ... No tocado -->
+    nombre touched: {{nombreControl.touched}}
+    nombre untouched: {{nombreControl.untouched}}
+
+      <!-- nombre sucio o no -->
+    nombre dirty: {{nombreControl.dirty}}
+    nombre pristine: {{nombreControl.pristine}}
+
+    </pre>
+
+
+    <p *ngIf="nombreControl.errors">Mensaje:
+
+      <span *ngIf="nombreControl.errors.pattern">
+        Ingrese solo numeros
+      </span>
+
+      <span *ngIf="nombreControl.errors.required">
+        Campo requerido
+      </span>
+
+      <span *ngIf="nombreControl.errors.email">
+        Ese no parece correo
+      </span>
+
+    </p>
 
   <!-- Los Label y los input son ñaños no pueden estar separados-->
   <label for = "nombre">Nombre</label>
@@ -24,20 +68,58 @@
     <!--Two way data binding-->
     <!--Componente -> HTML -->
     <!--HTML -> Componente-->
+
+    <!-- Validaciones -->
+    <!-- Required -> required -->
+    <!-- Correos -> email -->
+    <!-- Numeros -> min y max
+           min = "0"
+           max = "10"
+           type = "number"
+    -->
+    <!-- Longitud -> minlenght maxlenght
+    longitud de caracteres
+           minlength="3"
+           maxlength="6"
+    -->
+    <!-- Expresiones Regulares -> pattern -->
+
     <input id = "nombre"
            name = "nombre"
+           required
            type = "text"
+           pattern = "^\d+$"
            placeholder = "Escribe el nombre de una raza"
            [(ngModel)] = "raza.nombre"
-  >
-  </div>
+           #nombreControl = "ngModel"
 
-  <div>
+>
+</div>
 
-    {{raza.apellido}}
+<div>
+
+{{raza.apellido}}
+
+<pre>
+
+apellido valido: {{apellidoControl.valid}}
+apellido invalido: {{apellidoControl.invalid}}
+
+<!-- Solamente hay un error? Se puede hacer nuestras propias funciones de error -->
+    apellido errores: {{apellidoControl.errors | json}}
+
+      <!-- tocado ... No tocado -->
+    apellido touched: {{apellidoControl.touched}}
+    nombre untouched: {{apellidoControl.untouched}}
+
+      <!-- apellido sucio o no -->
+    apellido dirty: {{apellidoControl.dirty}}
+    apellido pristine: {{apellidoControl.pristine}}
+
+    </pre>
 
     <!-- Los Label y los input son ñaños no pueden estar separados-->
-    <label for = "nombre">Apellido</label>
+    <label for = "apellido">Apellido</label>
 
     <!--Banana Box Model-->
     <!--Two way data binding-->
@@ -45,9 +127,11 @@
     <!--HTML -> Componente-->
     <input id = "apellido"
            name = "apellido"
-           type = "text"
-           placeholder = "Escribe el apellido de una raza"
+           email
+           type = "email"
+           placeholder ="Escribe el apellido de una raza"
            [(ngModel)] = "raza.apellido"
+           #apellidoControl = "ngModel"
     >
   </div>
 
@@ -55,9 +139,19 @@
   
   <button type="reset"> Reset </button>     <!-- Se borran los datos que llene -->
 
-  <button type="submit"> Submit </button>   <!-- Para crear las razas -->
+  <button type="submit"
+    [disabled]="razaFormulario.invalid"
+
+  > Submit </button>   <!-- Para crear las razas -->
 
 </form>
+
+
+<div>Parrafo <p>OTRAS ETIQUETAS</p></div> <!-- DAN SALTO DE LIENA -->
+
+<P>Parrafo <span>SPAN</span> </P> <!-- NO DAN SALTO DE LIENA -->
+
+
 
 <!--
 <p>valor apellido = {{apellido}}</p>
@@ -72,3 +166,5 @@
 <button (click) = "mostrarEnConsola(apellidoEtiqueta)">Mostrar valor apellido</button>
 
 -->
+
+
