@@ -1,10 +1,12 @@
 <h1>Actualizar raza</h1>
+
+<div *ngIf="razaAActualizar">
 <form #formularioActualizarRaza="ngForm"
       novalidate
       (submit)="actualizarRaza(formularioActualizarRaza)"
 >
   <div>
-    <p *ngIf="inputNumbre.errors">
+    <p *ngIf="inputNombre.errors">
       Error:
       <span *ngIf="inputNombre.errors.required">
         El nombre es requerido
@@ -13,11 +15,18 @@
 
     <label for="nombre">Nombre</label>
     <input id="nombre"
-           requiredtype = "text"
+           required
+           type = "text"
            name = "nombre"
            [(ngModel)] = "razaAActualizar.nombre"
            #inputNombre = "ngModel"
     >
 
   </div>
+
+<button [disabled]="formularioActualizarRaza.invalid">
+  Actualizar
+</button>
+
 </form>
+</div>

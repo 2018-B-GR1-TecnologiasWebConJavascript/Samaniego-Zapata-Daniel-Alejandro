@@ -27,25 +27,28 @@
         Eliminar
       </button>
       <!-- Property Binding [propiedad]  aacedemos a una propiedad de la etiqueta   JS-->
-      <a [routerLink]="['/menu','ver-usuario',usuario.id]">
+      <a [routerLink]="
+      ['/menu','ver-usuario',usuario.id]">
         <!--
         /menu/ver-usuario-usuario.id
         url -> arreglo
         ['/menu','ver-usuario',usuario.id]
         -->
-
         <button>
           Ver
+        </button>
+      </a>
+
+      <a [routerLink]="
+      ['/menu','actualizar-raza',usuario.id]">
+        <button>
+          Actualizar
         </button>
       </a>
 
     </td>
   </tr>
 </table>
-
-<router-outlet></router-outlet>
-
-
 
 
 <!-- DIRECTIVAS-->

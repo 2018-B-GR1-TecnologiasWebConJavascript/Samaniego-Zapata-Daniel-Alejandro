@@ -88,7 +88,6 @@
            name = "nombre"
            required
            type = "text"
-           pattern = "^\d+$"
            placeholder = "Escribe el nombre de una raza"
            [(ngModel)] = "raza.nombre"
            #nombreControl = "ngModel"
@@ -127,8 +126,6 @@ apellido invalido: {{apellidoControl.invalid}}
     <!--HTML -> Componente-->
     <input id = "apellido"
            name = "apellido"
-           email
-           type = "email"
            placeholder ="Escribe el apellido de una raza"
            [(ngModel)] = "raza.apellido"
            #apellidoControl = "ngModel"

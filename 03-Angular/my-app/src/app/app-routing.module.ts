@@ -60,7 +60,7 @@ const routes: Routes = [
 
       {
         //   menu/actualizar-raza
-        path: 'actualizar-raza/:idRaza',
+        path: 'actualizar-raza/:razaId',
         component: RutaActualizarRazaComponent,
       },
 
