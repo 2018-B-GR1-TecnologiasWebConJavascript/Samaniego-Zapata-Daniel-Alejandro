@@ -1,32 +1,30 @@
 <h1>Actualizar raza</h1>
 
 <div *ngIf="razaAActualizar">
-<form #formularioActualizarRaza="ngForm"
-      novalidate
-      (submit)="actualizarRaza(formularioActualizarRaza)"
->
-  <div>
-    <p *ngIf="inputNombre.errors">
-      Error:
-      <span *ngIf="inputNombre.errors.required">
+  <form #formularioActualizarRaza="ngForm"
+        novalidate
+        (submit)="actualizarRaza(formularioActualizarRaza)"
+  >
+    <div>
+      <p *ngIf="inputNombre.errors">
+        Error:
+        <span *ngIf="inputNombre.errors.required">
         El nombre es requerido
       </span>
-    </p>
+      </p>
+      <label for="nombre">Nombre</label>
+      <input id="nombre"
+             required
+             type="text"
+             name="nombre"
+             [(ngModel)]="razaAActualizar.nombre"
+             #inputNombre="ngModel"
+      >
+    </div>
 
-    <label for="nombre">Nombre</label>
-    <input id="nombre"
-           required
-           type = "text"
-           name = "nombre"
-           [(ngModel)] = "razaAActualizar.nombre"
-           #inputNombre = "ngModel"
-    >
+    <button [disabled]="formularioActualizarRaza.invalid">
+      Actualizar
+    </button>
 
-  </div>
-
-<button [disabled]="formularioActualizarRaza.invalid">
-  Actualizar
-</button>
-
-</form>
+  </form>
 </div>
