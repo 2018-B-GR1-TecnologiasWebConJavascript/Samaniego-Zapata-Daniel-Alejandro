@@ -28,12 +28,14 @@ export class RutaActualizarRazaComponent implements OnInit {
     rutaActiva$
       .subscribe(
         (parametros: ParametrosRutaActualizarRaza) => {
+          console.log(parametros["razaId"],'asdfg')
           const raza$ = this._razaRestService
-            .findOneById(parametros.idRaza);
-
+            .findOneById(parametros.razaId);
+          console.log(raza$,'asdfg')
           raza$
             .subscribe(
               (raza: Raza) => {
+                console.log(raza,'asdfg')
                 this.razaAActualizar = raza;
               },
               (error) => {
@@ -87,7 +89,7 @@ export class RutaActualizarRazaComponent implements OnInit {
 }
 
 interface ParametrosRutaActualizarRaza {
-  idRaza: string;
+  razaId: string;
 }
 
 
