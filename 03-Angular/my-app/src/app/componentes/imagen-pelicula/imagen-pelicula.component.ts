@@ -13,12 +13,23 @@ export class ImagenPeliculaComponent implements OnInit {
   @Input()
   titulo: string;
 
-  @Input()
+  @Input() // Propiedades
   anio: string;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  lanzarEventoDioClick(){
+    const objetoPelicula ={
+      titulo: this.titulo,
+      anio: this.anio,
+      nombre: this.nombre
+    };
+
+    this.dioClick.emit(objetoPelicula);
+
   }
 
 }
