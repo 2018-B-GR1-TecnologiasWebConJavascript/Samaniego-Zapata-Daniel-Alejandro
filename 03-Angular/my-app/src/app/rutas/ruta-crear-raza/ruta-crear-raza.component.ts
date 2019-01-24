@@ -39,7 +39,7 @@ export class RutaCrearRazaComponent implements OnInit {
             console.error('Error: ', error);
           }
         );
-      
+
     // } else {
     //   alert('ERROR, No contiene una letra A');
     // }

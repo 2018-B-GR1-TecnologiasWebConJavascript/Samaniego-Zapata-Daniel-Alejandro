@@ -23,6 +23,7 @@ import {FormsModule} from "@angular/forms";
 import { RutaActualizarRazaComponent } from './rutas/ruta-actualizar-raza/ruta-actualizar-raza.component';
 import { ImagenPeliculaComponent } from './componentes/imagen-pelicula/imagen-pelicula.component';
 import { FormularioRazaComponent } from './componentes/formulario-raza/formulario-raza.component';
+import { LoginComponent } from './componentes/login/login.component';
 
 @NgModule({
   declarations: [   // Components
@@ -43,6 +44,7 @@ import { FormularioRazaComponent } from './componentes/formulario-raza/formulari
     RutaActualizarRazaComponent,
     ImagenPeliculaComponent,
     FormularioRazaComponent,
+    LoginComponent,
   ],
   imports: [  //Modulos
     BrowserModule,        // Sirve para dejarnos utilizar el Directivas, Event binding, interpolacion, property binding.

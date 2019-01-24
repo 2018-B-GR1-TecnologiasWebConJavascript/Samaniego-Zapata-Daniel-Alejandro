@@ -20,6 +20,9 @@ module.exports = {
     // Body Query ... Guarda los parametros de
     const parametros = req.allParams();
 
+
+    // Buscar el usuario con username y password
+    // como el que te mando
     var nombreCac = await Raza.find({
       nombre: {'startsWith': parametros.nombre}  // Los que empiezan con
     });
@@ -31,6 +34,21 @@ module.exports = {
     return res.ok(nombreCac);
 
   },
+
+  login:async (req,res) => {
+    const parametros = req.allParams();
+
+    var usuarioLogeado = await Raza.find({
+      username: parametros.username,
+      password: parametros.password,
+
+    });
+
+    if(usuarioLogeado){
+      return res.ok(usuarioLogeado);
+    }
+
+  }
 
 };
 
