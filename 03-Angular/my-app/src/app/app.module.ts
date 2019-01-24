@@ -22,6 +22,7 @@ import { RutaCrearRazaComponent } from './rutas/ruta-crear-raza/ruta-crear-raza.
 import {FormsModule} from "@angular/forms";
 import { RutaActualizarRazaComponent } from './rutas/ruta-actualizar-raza/ruta-actualizar-raza.component';
 import { ImagenPeliculaComponent } from './componentes/imagen-pelicula/imagen-pelicula.component';
+import { FormularioRazaComponent } from './componentes/formulario-raza/formulario-raza.component';
 
 @NgModule({
   declarations: [   // Components
@@ -41,6 +42,7 @@ import { ImagenPeliculaComponent } from './componentes/imagen-pelicula/imagen-pe
     RutaCrearRazaComponent,
     RutaActualizarRazaComponent,
     ImagenPeliculaComponent,
+    FormularioRazaComponent,
   ],
   imports: [  //Modulos
     BrowserModule,        // Sirve para dejarnos utilizar el Directivas, Event binding, interpolacion, property binding.

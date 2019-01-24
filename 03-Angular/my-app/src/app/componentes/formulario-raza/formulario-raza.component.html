@@ -1,0 +1,27 @@
+
+<form #formularioActualizarRaza="ngForm"
+      novalidate
+      (submit)="emitirFormularioValido(formularioActualizarRaza)"
+>
+  <div>
+    <p *ngIf="inputNombre.errors">
+      Error:
+      <span *ngIf="inputNombre.errors.required">
+        El nombre es requerido
+      </span>
+    </p>
+    <label for="nombre">Nombre Raza</label>
+    <input id="nombre"
+           required
+           type="text"
+           name="nombre"
+           [(ngModel)]="nombreRaza"
+           #inputNombre="ngModel"
+    >
+  </div>
+
+  <button [disabled]="formularioActualizarRaza.invalid">
+    {{nombreBoton}}
+  </button>
+
+</form>

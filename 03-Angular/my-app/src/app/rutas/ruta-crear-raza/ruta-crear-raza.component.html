@@ -2,166 +2,173 @@
 
 <p>Cree razas de animales</p>
 
-<!-- novalidate -> Navegador no validez por fa-->
-<form #razaFormulario = "ngForm"
-      novalidate
-      (submit)="crearRaza(razaFormulario)">
-
-  <pre>
-    formulario valido: {{razaFormulario.valid}}
-    formulario invalido: {{razaFormulario.invalid}}
-
-    formulario errores: {{razaFormulario.errors}}
-
-    <!-- tocado ... No tocado -->
-    formulario touched: {{razaFormulario.touched}}
-    formulario untouched: {{razaFormulario.untouched}}
-
-    <!-- Formulario sucio o no -->
-    formulario dirty: {{razaFormulario.dirty}}
-    formulario pristine: {{razaFormulario.pristine}}
-
-  </pre>
-
-  <div>
-
-  {{raza.nombre}}
-
-    <pre>
-
-    nombre valido: {{nombreControl.valid}}
-    nombre invalido: {{nombreControl.invalid}}
-
-    nombre errores: {{nombreControl.errors | json}}
-
-      <!-- tocado ... No tocado -->
-    nombre touched: {{nombreControl.touched}}
-    nombre untouched: {{nombreControl.untouched}}
-
-      <!-- nombre sucio o no -->
-    nombre dirty: {{nombreControl.dirty}}
-    nombre pristine: {{nombreControl.pristine}}
-
-    </pre>
-
-
-    <p *ngIf="nombreControl.errors">Mensaje:
-
-      <span *ngIf="nombreControl.errors.pattern">
-        Ingrese solo numeros
-      </span>
-
-      <span *ngIf="nombreControl.errors.required">
-        Campo requerido
-      </span>
-
-      <span *ngIf="nombreControl.errors.email">
-        Ese no parece correo
-      </span>
-
-    </p>
-
-  <!-- Los Label y los input son ñaños no pueden estar separados-->
-  <label for = "nombre">Nombre</label>
-
-    <!--Banana Box Model-->
-    <!--Two way data binding-->
-    <!--Componente -> HTML -->
-    <!--HTML -> Componente-->
-
-    <!-- Validaciones -->
-    <!-- Required -> required -->
-    <!-- Correos -> email -->
-    <!-- Numeros -> min y max
-           min = "0"
-           max = "10"
-           type = "number"
-    -->
-    <!-- Longitud -> minlenght maxlenght
-    longitud de caracteres
-           minlength="3"
-           maxlength="6"
-    -->
-    <!-- Expresiones Regulares -> pattern -->
-
-    <input id = "nombre"
-           name = "nombre"
-           required
-           type = "text"
-           placeholder = "Escribe el nombre de una raza"
-           [(ngModel)] = "raza.nombre"
-           #nombreControl = "ngModel"
-
->
-</div>
-
-<div>
-
-{{raza.apellido}}
-
-<pre>
-
-apellido valido: {{apellidoControl.valid}}
-apellido invalido: {{apellidoControl.invalid}}
-
-<!-- Solamente hay un error? Se puede hacer nuestras propias funciones de error -->
-    apellido errores: {{apellidoControl.errors | json}}
-
-      <!-- tocado ... No tocado -->
-    apellido touched: {{apellidoControl.touched}}
-    nombre untouched: {{apellidoControl.untouched}}
-
-      <!-- apellido sucio o no -->
-    apellido dirty: {{apellidoControl.dirty}}
-    apellido pristine: {{apellidoControl.pristine}}
-
-    </pre>
-
-    <!-- Los Label y los input son ñaños no pueden estar separados-->
-    <label for = "apellido">Apellido</label>
-
-    <!--Banana Box Model-->
-    <!--Two way data binding-->
-    <!--Componente -> HTML -->
-    <!--HTML -> Componente-->
-    <input id = "apellido"
-           name = "apellido"
-           placeholder ="Escribe el apellido de una raza"
-           [(ngModel)] = "raza.apellido"
-           #apellidoControl = "ngModel"
-    >
-  </div>
-
-  <button type="button"> Button </button>  <!-- Cuando no quiero que se ejecute la funcion crearRaza pero si cualquier otra funcion -->
-  
-  <button type="reset"> Reset </button>     <!-- Se borran los datos que llene -->
-
-  <button type="submit"
-    [disabled]="razaFormulario.invalid"
-
-  > Submit </button>   <!-- Para crear las razas -->
-
-</form>
-
-
-<div>Parrafo <p>OTRAS ETIQUETAS</p></div> <!-- DAN SALTO DE LIENA -->
-
-<P>Parrafo <span>SPAN</span> </P> <!-- NO DAN SALTO DE LIENA -->
-
-
-
-<!--
-<p>valor apellido = {{apellido}}</p>
-
-<input id="apellido"
-       type = "text"
-       name="apellido"
-       #apellidoEtiqueta
-
+<app-formulario-raza
+  [nombreBoton] = "'Crear'"
+  (formularioValido)="crearRaza($event)"
 >
 
-<button (click) = "mostrarEnConsola(apellidoEtiqueta)">Mostrar valor apellido</button>
+</app-formulario-raza>
 
--->
+<!--&lt;!&ndash; novalidate -> Navegador no validez por fa&ndash;&gt;-->
+<!--<form #razaFormulario = "ngForm"-->
+      <!--novalidate-->
+      <!--(submit)="crearRaza(razaFormulario)">-->
+
+  <!--<pre>-->
+    <!--formulario valido: {{razaFormulario.valid}}-->
+    <!--formulario invalido: {{razaFormulario.invalid}}-->
+
+    <!--formulario errores: {{razaFormulario.errors}}-->
+
+    <!--&lt;!&ndash; tocado ... No tocado &ndash;&gt;-->
+    <!--formulario touched: {{razaFormulario.touched}}-->
+    <!--formulario untouched: {{razaFormulario.untouched}}-->
+
+    <!--&lt;!&ndash; Formulario sucio o no &ndash;&gt;-->
+    <!--formulario dirty: {{razaFormulario.dirty}}-->
+    <!--formulario pristine: {{razaFormulario.pristine}}-->
+
+  <!--</pre>-->
+
+  <!--<div>-->
+
+  <!--{{raza.nombre}}-->
+
+    <!--<pre>-->
+
+    <!--nombre valido: {{nombreControl.valid}}-->
+    <!--nombre invalido: {{nombreControl.invalid}}-->
+
+    <!--nombre errores: {{nombreControl.errors | json}}-->
+
+      <!--&lt;!&ndash; tocado ... No tocado &ndash;&gt;-->
+    <!--nombre touched: {{nombreControl.touched}}-->
+    <!--nombre untouched: {{nombreControl.untouched}}-->
+
+      <!--&lt;!&ndash; nombre sucio o no &ndash;&gt;-->
+    <!--nombre dirty: {{nombreControl.dirty}}-->
+    <!--nombre pristine: {{nombreControl.pristine}}-->
+
+    <!--</pre>-->
+
+
+    <!--<p *ngIf="nombreControl.errors">Mensaje:-->
+
+      <!--<span *ngIf="nombreControl.errors.pattern">-->
+        <!--Ingrese solo numeros-->
+      <!--</span>-->
+
+      <!--<span *ngIf="nombreControl.errors.required">-->
+        <!--Campo requerido-->
+      <!--</span>-->
+
+      <!--<span *ngIf="nombreControl.errors.email">-->
+        <!--Ese no parece correo-->
+      <!--</span>-->
+
+    <!--</p>-->
+
+  <!--&lt;!&ndash; Los Label y los input son ñaños no pueden estar separados&ndash;&gt;-->
+  <!--<label for = "nombre">Nombre</label>-->
+
+    <!--&lt;!&ndash;Banana Box Model&ndash;&gt;-->
+    <!--&lt;!&ndash;Two way data binding&ndash;&gt;-->
+    <!--&lt;!&ndash;Componente -> HTML &ndash;&gt;-->
+    <!--&lt;!&ndash;HTML -> Componente&ndash;&gt;-->
+
+    <!--&lt;!&ndash; Validaciones &ndash;&gt;-->
+    <!--&lt;!&ndash; Required -> required &ndash;&gt;-->
+    <!--&lt;!&ndash; Correos -> email &ndash;&gt;-->
+    <!--&lt;!&ndash; Numeros -> min y max-->
+           <!--min = "0"-->
+           <!--max = "10"-->
+           <!--type = "number"-->
+    <!--&ndash;&gt;-->
+    <!--&lt;!&ndash; Longitud -> minlenght maxlenght-->
+    <!--longitud de caracteres-->
+           <!--minlength="3"-->
+           <!--maxlength="6"-->
+    <!--&ndash;&gt;-->
+    <!--&lt;!&ndash; Expresiones Regulares -> pattern &ndash;&gt;-->
+
+    <!--<input id = "nombre"-->
+           <!--name = "nombre"-->
+           <!--required-->
+           <!--type = "text"-->
+           <!--placeholder = "Escribe el nombre de una raza"-->
+           <!--[(ngModel)] = "raza.nombre"-->
+           <!--#nombreControl = "ngModel"-->
+
+<!--&gt;-->
+<!--</div>-->
+
+<!--<div>-->
+
+<!--{{raza.apellido}}-->
+
+<!--<pre>-->
+
+<!--apellido valido: {{apellidoControl.valid}}-->
+<!--apellido invalido: {{apellidoControl.invalid}}-->
+
+<!--&lt;!&ndash; Solamente hay un error? Se puede hacer nuestras propias funciones de error &ndash;&gt;-->
+    <!--apellido errores: {{apellidoControl.errors | json}}-->
+
+      <!--&lt;!&ndash; tocado ... No tocado &ndash;&gt;-->
+    <!--apellido touched: {{apellidoControl.touched}}-->
+    <!--nombre untouched: {{apellidoControl.untouched}}-->
+
+      <!--&lt;!&ndash; apellido sucio o no &ndash;&gt;-->
+    <!--apellido dirty: {{apellidoControl.dirty}}-->
+    <!--apellido pristine: {{apellidoControl.pristine}}-->
+
+    <!--</pre>-->
+
+    <!--&lt;!&ndash; Los Label y los input son ñaños no pueden estar separados&ndash;&gt;-->
+    <!--<label for = "apellido">Apellido</label>-->
+
+    <!--&lt;!&ndash;Banana Box Model&ndash;&gt;-->
+    <!--&lt;!&ndash;Two way data binding&ndash;&gt;-->
+    <!--&lt;!&ndash;Componente -> HTML &ndash;&gt;-->
+    <!--&lt;!&ndash;HTML -> Componente&ndash;&gt;-->
+    <!--<input id = "apellido"-->
+           <!--name = "apellido"-->
+           <!--placeholder ="Escribe el apellido de una raza"-->
+           <!--[(ngModel)] = "raza.apellido"-->
+           <!--#apellidoControl = "ngModel"-->
+    <!--&gt;-->
+  <!--</div>-->
+
+  <!--<button type="button"> Button </button>  &lt;!&ndash; Cuando no quiero que se ejecute la funcion crearRaza pero si cualquier otra funcion &ndash;&gt;-->
+  <!---->
+  <!--<button type="reset"> Reset </button>     &lt;!&ndash; Se borran los datos que llene &ndash;&gt;-->
+
+  <!--<button type="submit"-->
+    <!--[disabled]="razaFormulario.invalid"-->
+
+  <!--&gt; Submit </button>   &lt;!&ndash; Para crear las razas &ndash;&gt;-->
+
+<!--</form>-->
+
+
+<!--<div>Parrafo <p>OTRAS ETIQUETAS</p></div> &lt;!&ndash; DAN SALTO DE LIENA &ndash;&gt;-->
+
+<!--<P>Parrafo <span>SPAN</span> </P> &lt;!&ndash; NO DAN SALTO DE LIENA &ndash;&gt;-->
+
+
+
+<!--&lt;!&ndash;-->
+<!--<p>valor apellido = {{apellido}}</p>-->
+
+<!--<input id="apellido"-->
+       <!--type = "text"-->
+       <!--name="apellido"-->
+       <!--#apellidoEtiqueta-->
+
+<!--&gt;-->
+
+<!--<button (click) = "mostrarEnConsola(apellidoEtiqueta)">Mostrar valor apellido</button>-->
+
+<!--&ndash;&gt;-->
 
 
