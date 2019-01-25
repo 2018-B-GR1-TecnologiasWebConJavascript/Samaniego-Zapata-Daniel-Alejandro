@@ -39,7 +39,9 @@ export class RazaRestService {
   }
 
 
-  create(nombre: string): Observable<Raza> {
+  create(nombre: string,
+         username: string,
+         password: string): Observable<Raza> {
 
     const objetoAGuardar:Raza = {
       nombre: nombre

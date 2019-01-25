@@ -35,6 +35,9 @@ module.exports = {
 
   },
 
+
+  // http://localhost:1337/raza/login
+  // POST
   login:async (req,res) => {
     const parametros = req.allParams();
 
@@ -46,6 +49,8 @@ module.exports = {
 
     if(usuarioLogeado){
       return res.ok(usuarioLogeado);
+    } else{
+      return res.badRequest({mensaje: 'Usuario Invalido'})
     }
 
   }
