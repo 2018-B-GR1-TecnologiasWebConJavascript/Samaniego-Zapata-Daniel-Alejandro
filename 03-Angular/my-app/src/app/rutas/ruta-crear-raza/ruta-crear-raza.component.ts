@@ -27,7 +27,7 @@ export class RutaCrearRazaComponent implements OnInit {
     // if (this.nombreContieneA(razaObjeto.nombre.toString())) {
 
       const crearRazas$ = this._razaRestService
-        .create(razaObjeto.nombre);
+        .create(razaObjeto.nombre, razaObjeto.username, razaObjeto.password);
 
       crearRazas$
         .subscribe(

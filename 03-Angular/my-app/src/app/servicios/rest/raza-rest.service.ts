@@ -43,8 +43,10 @@ export class RazaRestService {
          username: string,
          password: string): Observable<Raza> {
 
-    const objetoAGuardar:Raza = {
-      nombre: nombre
+    const objetoAGuardar = {
+      nombre: nombre,
+      username: username,
+      password: password,
     };
 
     const url = environment.url + this.nombreModelo;
